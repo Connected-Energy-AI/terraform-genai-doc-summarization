@@ -21,6 +21,13 @@ To deploy this blueprint you must have an active billing account and billing per
 ## Documentation
 - [Generative AI Document Summary](https://cloud.google.com/architecture/ai-ml/generative-ai-document-summarization)
 
+### Agent Documentation
+- [Agent Workflows](./docs/AGENT_WORKFLOWS.md) - Detailed workflows for document processing
+- [Document Types](./docs/DOCUMENT_TYPES.md) - Supported document formats and processing
+- [Tool Calls](./docs/TOOL_CALLS.md) - API integrations and tool documentation
+- [Training Data and Evaluations](./docs/TRAINING_DATA_AND_EVALS.md) - Training guidance and evaluation metrics
+- [Agentic Orchestration](./docs/AGENTIC_ORCHESTRATION.md) - Sub-agents, orchestration, and automation
+
 ## Deployment Duration
 Configuration: 1 mins
 Deployment: 5 mins
