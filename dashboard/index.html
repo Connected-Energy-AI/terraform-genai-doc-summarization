@@ -259,18 +259,22 @@
 
         .highlights-list li {
             padding: 0.25rem 0;
-            padding-left: 1.25rem;
+            padding-left: 1.5rem;
             position: relative;
             font-size: 0.9rem;
             color: #3c4043;
+            list-style: none;
         }
 
         .highlights-list li::before {
-            content: "✓";
+            content: "";
             position: absolute;
             left: 0;
-            color: var(--secondary-color);
-            font-weight: bold;
+            top: 0.5rem;
+            width: 0.5rem;
+            height: 0.5rem;
+            background: var(--secondary-color);
+            border-radius: 50%;
         }
 
         .strategic-value {
@@ -469,35 +473,35 @@
 </head>
 <body>
     <header class="header">
-        <h1>🎯 Expert Profiles Dashboard</h1>
+        <h1><span aria-hidden="true">🎯</span> Expert Profiles Dashboard</h1>
         <p>Antitrust Litigation Strategy & Expert Network</p>
     </header>
 
     <div class="container">
         <!-- Search -->
         <div class="search-container">
-            <input type="text" class="search-input" id="searchInput" placeholder="🔍 Search experts, firms, expertise, cases...">
+            <input type="text" class="search-input" id="searchInput" placeholder="Search experts, firms, expertise, cases..." aria-label="Search experts, firms, expertise, and cases">
         </div>
 
         <!-- Filter Buttons -->
-        <div class="filter-container">
+        <div class="filter-container" role="group" aria-label="Filter expert profiles by category">
             <button class="filter-btn active" data-filter="all">
-                <span class="emoji">📋</span>All Experts
+                <span class="emoji" aria-hidden="true">📋</span>All Experts
             </button>
             <button class="filter-btn" data-filter="antitrust">
-                <span class="emoji">⚖️</span>Antitrust Attorneys
+                <span class="emoji" aria-hidden="true">⚖️</span>Antitrust Attorneys
             </button>
             <button class="filter-btn" data-filter="ai_ml">
-                <span class="emoji">🤖</span>AI/ML Experts
+                <span class="emoji" aria-hidden="true">🤖</span>AI/ML Experts
             </button>
             <button class="filter-btn" data-filter="neo4j">
-                <span class="emoji">🔗</span>Neo4j Specialists
+                <span class="emoji" aria-hidden="true">🔗</span>Neo4j Specialists
             </button>
             <button class="filter-btn" data-filter="law_schools">
-                <span class="emoji">🎓</span>Law Schools
+                <span class="emoji" aria-hidden="true">🎓</span>Law Schools
             </button>
             <button class="filter-btn" data-filter="legal_cases">
-                <span class="emoji">📚</span>Legal Cases
+                <span class="emoji" aria-hidden="true">📚</span>Legal Cases
             </button>
         </div>
 
@@ -1015,19 +1019,19 @@
                         <div class="card-details">
                             <div class="highlights-section">
                                 <div class="section-title">Key Highlights</div>
-                                <ul class="highlights-list">
+                                <ul class="highlights-list" role="list">
                                     ${attorney.highlights.map(h => `<li>${h}</li>`).join('')}
                                 </ul>
                             </div>
                             <div class="strategic-value">${attorney.strategic_value}</div>
                             ${attorney.website ? `
                             <div class="contact-info">
-                                <a href="${attorney.website}" target="_blank" class="contact-link">🔗 Visit Firm Website</a>
-                                <span class="locations">📍 ${attorney.locations.join(', ')}</span>
+                                <a href="${attorney.website}" target="_blank" rel="noopener noreferrer" class="contact-link" title="Visit ${attorney.org} website (opens in new tab)">Visit Firm Website</a>
+                                <span class="locations">${attorney.locations.join(', ')}</span>
                             </div>
                             ` : ''}
                         </div>
-                        <button class="expand-btn" onclick="toggleDetails(this)">▼ Show Details</button>
+                        <button class="expand-btn" onclick="toggleDetails(this)" aria-expanded="false">Show Details</button>
                     </div>
                 </div>
             `;
@@ -1050,13 +1054,13 @@
                         <div class="card-details">
                             <div class="highlights-section">
                                 <div class="section-title">Key Highlights</div>
-                                <ul class="highlights-list">
+                                <ul class="highlights-list" role="list">
                                     ${expert.highlights.map(h => `<li>${h}</li>`).join('')}
                                 </ul>
                             </div>
                             <div class="strategic-value">${expert.strategic_value}</div>
                         </div>
-                        <button class="expand-btn" onclick="toggleDetails(this)">▼ Show Details</button>
+                        <button class="expand-btn" onclick="toggleDetails(this)" aria-expanded="false">Show Details</button>
                     </div>
                 </div>
             `;
@@ -1079,19 +1083,19 @@
                         <div class="card-details">
                             <div class="highlights-section">
                                 <div class="section-title">Key Highlights</div>
-                                <ul class="highlights-list">
+                                <ul class="highlights-list" role="list">
                                     ${expert.highlights.map(h => `<li>${h}</li>`).join('')}
                                 </ul>
                             </div>
                             <div class="highlights-section">
                                 <div class="section-title">Litigation Use Cases</div>
-                                <ul class="highlights-list">
+                                <ul class="highlights-list" role="list">
                                     ${expert.use_cases.map(u => `<li>${u}</li>`).join('')}
                                 </ul>
                             </div>
                             <div class="strategic-value">${expert.strategic_value}</div>
                         </div>
-                        <button class="expand-btn" onclick="toggleDetails(this)">▼ Show Details</button>
+                        <button class="expand-btn" onclick="toggleDetails(this)" aria-expanded="false">Show Details</button>
                     </div>
                 </div>
             `;
@@ -1116,13 +1120,13 @@
                         <div class="card-details">
                             <div class="highlights-section">
                                 <div class="section-title">Key Highlights</div>
-                                <ul class="highlights-list">
+                                <ul class="highlights-list" role="list">
                                     ${school.highlights.map(h => `<li>${h}</li>`).join('')}
                                 </ul>
                             </div>
                             <div class="strategic-value">${school.strategic_value}</div>
                         </div>
-                        <button class="expand-btn" onclick="toggleDetails(this)">▼ Show Details</button>
+                        <button class="expand-btn" onclick="toggleDetails(this)" aria-expanded="false">Show Details</button>
                     </div>
                 </div>
             `;
@@ -1143,19 +1147,19 @@
                         <div class="card-details">
                             <div class="highlights-section">
                                 <div class="section-title">Key Issues</div>
-                                <ul class="highlights-list">
+                                <ul class="highlights-list" role="list">
                                     ${legalCase.highlights.map(h => `<li>${h}</li>`).join('')}
                                 </ul>
                             </div>
                             <div class="precedent-list">
                                 <div class="section-title">Precedent Value</div>
-                                <ul>
+                                <ul role="list">
                                     ${legalCase.precedents.map(p => `<li>${p}</li>`).join('')}
                                 </ul>
                             </div>
                             <div class="strategic-value">${legalCase.strategic_value}</div>
                         </div>
-                        <button class="expand-btn" onclick="toggleDetails(this)">▼ Show Details</button>
+                        <button class="expand-btn" onclick="toggleDetails(this)" aria-expanded="false">Show Details</button>
                     </div>
                 </div>
             `;
@@ -1164,12 +1168,15 @@
         // Toggle card details
         function toggleDetails(btn) {
             const details = btn.previousElementSibling;
-            if (details.classList.contains('expanded')) {
+            const isExpanded = details.classList.contains('expanded');
+            if (isExpanded) {
                 details.classList.remove('expanded');
-                btn.textContent = '▼ Show Details';
+                btn.textContent = 'Show Details';
+                btn.setAttribute('aria-expanded', 'false');
             } else {
                 details.classList.add('expanded');
-                btn.textContent = '▲ Hide Details';
+                btn.textContent = 'Hide Details';
+                btn.setAttribute('aria-expanded', 'true');
             }
         }
 
