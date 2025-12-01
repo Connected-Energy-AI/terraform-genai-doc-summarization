@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<!--
+ Copyright 2024 Google LLC
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expert Profiles Dashboard - Antitrust Litigation Strategy</title>
+    <style>
+        :root {
+            --primary-color: #1a73e8;
+            --secondary-color: #34a853;
+            --warning-color: #fbbc04;
+            --danger-color: #ea4335;
+            --dark-color: #202124;
+            --light-color: #f8f9fa;
+            --border-radius: 8px;
+            --shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Google Sans', 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background-color: #f0f4f9;
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1a73e8 0%, #0d47a1 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Category Filter Buttons */
+        .filter-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+            justify-content: center;
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        .filter-btn {
+            padding: 0.75rem 1.5rem;
+            border: 2px solid var(--primary-color);
+            background: white;
+            color: var(--primary-color);
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .filter-btn:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .filter-btn.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .filter-btn .emoji {
+            margin-right: 0.5rem;
+        }
+
+        /* Stats Summary */
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            box-shadow: var(--shadow);
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .stat-card.antitrust { border-left-color: #ea4335; }
+        .stat-card.ai_ml { border-left-color: #34a853; }
+        .stat-card.neo4j { border-left-color: #fbbc04; }
+        .stat-card.law_schools { border-left-color: #4285f4; }
+        .stat-card.legal_cases { border-left-color: #9c27b0; }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .stat-label {
+            color: #5f6368;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+        }
+
+        /* Section Headers */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 2rem 0 1.5rem 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .section-header h2 {
+            font-size: 1.5rem;
+            color: var(--dark-color);
+        }
+
+        .section-header .badge {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+        }
+
+        /* Profile Cards */
+        .profiles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .profile-card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .profile-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .profile-card.hidden {
+            display: none;
+        }
+
+        .card-header {
+            padding: 1.25rem;
+            color: white;
+            position: relative;
+        }
+
+        .card-header.antitrust { background: linear-gradient(135deg, #ea4335 0%, #c62828 100%); }
+        .card-header.ai_ml { background: linear-gradient(135deg, #34a853 0%, #1b5e20 100%); }
+        .card-header.neo4j { background: linear-gradient(135deg, #fbbc04 0%, #f57c00 100%); }
+        .card-header.law_schools { background: linear-gradient(135deg, #4285f4 0%, #1565c0 100%); }
+        .card-header.legal_cases { background: linear-gradient(135deg, #9c27b0 0%, #6a1b9a 100%); }
+
+        .profile-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 0.25rem;
+        }
+
+        .profile-org {
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+
+        .experience-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255,255,255,0.2);
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+        }
+
+        .card-body {
+            padding: 1.25rem;
+        }
+
+        .expertise-section, .highlights-section, .cases-section {
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-weight: 600;
+            color: #5f6368;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .expertise-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .expertise-tag {
+            background: #e8f0fe;
+            color: var(--primary-color);
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+        }
+
+        .highlights-list {
+            list-style: none;
+        }
+
+        .highlights-list li {
+            padding: 0.25rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            font-size: 0.9rem;
+            color: #3c4043;
+            list-style: none;
+        }
+
+        .highlights-list li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+            width: 0.5rem;
+            height: 0.5rem;
+            background: var(--secondary-color);
+            border-radius: 50%;
+        }
+
+        .strategic-value {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            border-left: 3px solid var(--primary-color);
+            font-style: italic;
+            font-size: 0.9rem;
+            color: #5f6368;
+        }
+
+        .contact-info {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .contact-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .contact-link:hover {
+            text-decoration: underline;
+        }
+
+        .locations {
+            font-size: 0.85rem;
+            color: #5f6368;
+        }
+
+        /* Case Cards Special Styling */
+        .case-type {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+        }
+
+        .case-outcome {
+            background: #e8f5e9;
+            color: #1b5e20;
+            padding: 0.75rem;
+            border-radius: var(--border-radius);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .precedent-list {
+            background: #fff3e0;
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 1rem;
+        }
+
+        .precedent-list li {
+            padding: 0.25rem 0;
+            font-size: 0.9rem;
+        }
+
+        /* Strategic Recommendations Section */
+        .recommendations-section {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .recommendations-section h2 {
+            color: var(--dark-color);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .phase-card {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .phase-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .phase-card p {
+            color: #5f6368;
+            margin-bottom: 0.75rem;
+        }
+
+        .phase-card ul {
+            list-style: none;
+        }
+
+        .phase-card ul li {
+            padding: 0.25rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .phase-card ul li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: #5f6368;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .profiles-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 1.75rem;
+            }
+
+            .filter-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.85rem;
+            }
+        }
+
+        /* Search Box */
+        .search-container {
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .search-input {
+            width: 100%;
+            max-width: 500px;
+            padding: 1rem 1.5rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 30px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .search-input:focus {
+            border-color: var(--primary-color);
+        }
+
+        .search-input::placeholder {
+            color: #9aa0a6;
+        }
+
+        /* Expand/Collapse functionality */
+        .card-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .card-details.expanded {
+            max-height: 2000px;
+        }
+
+        .expand-btn {
+            width: 100%;
+            padding: 0.75rem;
+            background: #f8f9fa;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: var(--primary-color);
+            transition: background 0.3s ease;
+        }
+
+        .expand-btn:hover {
+            background: #e8f0fe;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1><span aria-hidden="true">🎯</span> Expert Profiles Dashboard</h1>
+        <p>Antitrust Litigation Strategy & Expert Network</p>
+    </header>
+
+    <div class="container">
+        <!-- Search -->
+        <div class="search-container">
+            <input type="text" class="search-input" id="searchInput" placeholder="Search experts, firms, expertise, cases..." aria-label="Search experts, firms, expertise, and cases">
+        </div>
+
+        <!-- Filter Buttons -->
+        <div class="filter-container" role="group" aria-label="Filter expert profiles by category">
+            <button class="filter-btn active" data-filter="all">
+                <span class="emoji" aria-hidden="true">📋</span>All Experts
+            </button>
+            <button class="filter-btn" data-filter="antitrust">
+                <span class="emoji" aria-hidden="true">⚖️</span>Antitrust Attorneys
+            </button>
+            <button class="filter-btn" data-filter="ai_ml">
+                <span class="emoji" aria-hidden="true">🤖</span>AI/ML Experts
+            </button>
+            <button class="filter-btn" data-filter="neo4j">
+                <span class="emoji" aria-hidden="true">🔗</span>Neo4j Specialists
+            </button>
+            <button class="filter-btn" data-filter="law_schools">
+                <span class="emoji" aria-hidden="true">🎓</span>Law Schools
+            </button>
+            <button class="filter-btn" data-filter="legal_cases">
+                <span class="emoji" aria-hidden="true">📚</span>Legal Cases
+            </button>
+        </div>
+
+        <!-- Stats Summary -->
+        <div class="stats-container">
+            <div class="stat-card antitrust">
+                <div class="stat-number">6</div>
+                <div class="stat-label">Elite Antitrust Attorneys</div>
+            </div>
+            <div class="stat-card ai_ml">
+                <div class="stat-number">8</div>
+                <div class="stat-label">AI/ML/Robotics Experts</div>
+            </div>
+            <div class="stat-card neo4j">
+                <div class="stat-number">7</div>
+                <div class="stat-label">Neo4j Specialists</div>
+            </div>
+            <div class="stat-card law_schools">
+                <div class="stat-number">5</div>
+                <div class="stat-label">Elite Law Schools</div>
+            </div>
+            <div class="stat-card legal_cases">
+                <div class="stat-number">8</div>
+                <div class="stat-label">Landmark Cases</div>
+            </div>
+        </div>
+
+        <!-- Antitrust Attorneys Section -->
+        <section id="antitrust-section" class="category-section" data-category="antitrust">
+            <div class="section-header">
+                <h2>⚖️ Elite Antitrust Attorneys</h2>
+                <span class="badge">6 Profiles</span>
+            </div>
+            <div class="profiles-grid" id="antitrust-grid">
+                <!-- Cards will be injected by JavaScript -->
+            </div>
+        </section>
+
+        <!-- AI/ML Experts Section -->
+        <section id="aiml-section" class="category-section" data-category="ai_ml">
+            <div class="section-header">
+                <h2>🤖 AI/ML/Robotics Experts</h2>
+                <span class="badge">8 Profiles</span>
+            </div>
+            <div class="profiles-grid" id="aiml-grid">
+                <!-- Cards will be injected by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Neo4j Specialists Section -->
+        <section id="neo4j-section" class="category-section" data-category="neo4j">
+            <div class="section-header">
+                <h2>🔗 Neo4j Graph Database Specialists</h2>
+                <span class="badge">7 Profiles</span>
+            </div>
+            <div class="profiles-grid" id="neo4j-grid">
+                <!-- Cards will be injected by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Law Schools Section -->
+        <section id="schools-section" class="category-section" data-category="law_schools">
+            <div class="section-header">
+                <h2>🎓 Elite Law Schools & Research Centers</h2>
+                <span class="badge">5 Institutions</span>
+            </div>
+            <div class="profiles-grid" id="schools-grid">
+                <!-- Cards will be injected by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Legal Cases Section -->
+        <section id="cases-section" class="category-section" data-category="legal_cases">
+            <div class="section-header">
+                <h2>📚 Landmark Legal Cases & Precedents</h2>
+                <span class="badge">8 Cases</span>
+            </div>
+            <div class="profiles-grid" id="cases-grid">
+                <!-- Cards will be injected by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Strategic Recommendations -->
+        <section class="recommendations-section" id="recommendations">
+            <h2>🎯 Strategic Recommendations for Building Your Litigation Team</h2>
+            
+            <div class="phase-card">
+                <h3>Phase 1: Core Team Development</h3>
+                <p>Essential attorneys for case development and initial filings</p>
+                <ul>
+                    <li><strong>Barry Barnett</strong> - Lead trial counsel with 40+ years Fortune 500 experience</li>
+                    <li><strong>Eric Cramer</strong> - Class action expertise with $9B+ in settlements</li>
+                    <li><strong>Derek Ho</strong> - Emergency relief and preliminary injunctions</li>
+                </ul>
+            </div>
+
+            <div class="phase-card">
+                <h3>Phase 2: Criminal Defense (If Applicable)</h3>
+                <p>Specialized defense for criminal antitrust exposure</p>
+                <ul>
+                    <li><strong>John Walsh</strong> - First-ever criminal antitrust acquittal</li>
+                    <li><strong>Carlos Rainer</strong> - High-value dispute management ($10M-$100M+)</li>
+                </ul>
+            </div>
+
+            <div class="phase-card">
+                <h3>Phase 3: Technical Analysis & Expert Witnesses</h3>
+                <p>Expert witnesses and technical support for technology markets</p>
+                <ul>
+                    <li><strong>AI/ML Experts</strong> - Technology market analysis and AI capabilities assessment</li>
+                    <li><strong>Neo4j Specialists</strong> - Conspiracy network mapping and relationship analysis</li>
+                </ul>
+            </div>
+
+            <div class="phase-card">
+                <h3>Investigation Support Tools</h3>
+                <p>Leverage this Terraform solution for document analysis</p>
+                <ul>
+                    <li><strong>Document Summarization</strong> - Use GenAI for document pattern detection</li>
+                    <li><strong>Knowledge Graphs</strong> - Build conspiracy networks using Neo4j</li>
+                    <li><strong>Research Partnerships</strong> - Engage Georgetown, Columbia, or Harvard for specialized analysis</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <p>Expert Profiles Dashboard v1.0 | Last Updated: December 2024</p>
+        <p>This dashboard integrates with the Generative AI Document Summarization solution</p>
+    </footer>
+
+    <script>
+        // Expert Profiles Data
+        const expertsData = {
+            attorneys: [
+                {
+                    id: "attorney_001",
+                    name: "Barry Barnett",
+                    org: "Susman Godfrey",
+                    category: "antitrust",
+                    experience: "40+ years",
+                    expertise: ["Complex antitrust litigation", "Fortune 500 corporate disputes", "Class action defense", "Trial advocacy", "Appellate practice"],
+                    highlights: ["40+ years of elite antitrust litigation experience", "Successfully battled Fortune 500 corporations", "Nationally recognized trial lawyer", "Sherman Act and Clayton Act expertise"],
+                    strategic_value: "Premier trial lawyer for high-stakes antitrust litigation against major corporations",
+                    website: "https://www.susmangodfrey.com",
+                    locations: ["Houston", "Los Angeles", "New York", "Seattle"]
+                },
+                {
+                    id: "attorney_002",
+                    name: "Derek Ho",
+                    org: "Kellogg Hansen",
+                    category: "antitrust",
+                    experience: "25+ years",
+                    expertise: ["Preliminary injunction litigation", "Merger antitrust review", "FTC and DOJ investigations", "Complex commercial litigation"],
+                    highlights: ["Landmark preliminary injunction victories", "Expert in merger review processes", "Former DOJ Antitrust Division attorney", "Published extensively on enforcement"],
+                    strategic_value: "Expert in preliminary relief and emergency antitrust motions",
+                    website: "https://www.kellogghansen.com",
+                    locations: ["Washington, D.C."]
+                },
+                {
+                    id: "attorney_003",
+                    name: "John Walsh",
+                    org: "WilmerHale",
+                    category: "antitrust",
+                    experience: "35+ years",
+                    expertise: ["Criminal antitrust defense", "White-collar criminal defense", "Cartel investigations", "Grand jury proceedings"],
+                    highlights: ["First-ever criminal antitrust acquittal", "Leading expert in cartel defense", "Former federal prosecutor", "Pioneer in compliance programs"],
+                    strategic_value: "Unparalleled criminal antitrust defense expertise with proven trial success",
+                    website: "https://www.wilmerhale.com",
+                    locations: ["Washington, D.C.", "Boston", "New York"]
+                },
+                {
+                    id: "attorney_004",
+                    name: "Carlos Rainer",
+                    org: "Norton Rose Fulbright",
+                    category: "antitrust",
+                    experience: "28+ years",
+                    expertise: ["High-value antitrust disputes", "International antitrust coordination", "Damages quantification", "Expert witness coordination"],
+                    highlights: ["Handles $10M-$100M+ disputes regularly", "Expert in complex damages calculations", "Multi-jurisdictional coordination", "Strong economic expert network"],
+                    strategic_value: "Expert in high-value disputes with strong economic expert network",
+                    website: "https://www.nortonrosefulbright.com",
+                    locations: ["Houston", "Washington, D.C.", "Dallas"]
+                },
+                {
+                    id: "attorney_005",
+                    name: "Eric Cramer",
+                    org: "Berger Montague",
+                    category: "antitrust",
+                    experience: "30+ years",
+                    expertise: ["Antitrust class actions", "Multi-district litigation", "Settlement negotiations", "Pharmaceutical antitrust"],
+                    highlights: ["$9B+ in antitrust settlements nationally", "Leading plaintiffs' class action attorney", "Lawdragon 500 Leading Plaintiff Lawyers", "MDL steering committee member"],
+                    strategic_value: "Exceptional track record in major antitrust settlements and class actions",
+                    website: "https://www.bergermontague.com",
+                    locations: ["Philadelphia", "Minneapolis", "San Diego"]
+                },
+                {
+                    id: "attorney_006",
+                    name: "William Isaacson",
+                    org: "Paul Weiss",
+                    category: "antitrust",
+                    experience: "38+ years",
+                    expertise: ["Antitrust and competition law", "Sports antitrust litigation", "Technology sector antitrust", "Antitrust appellate practice"],
+                    highlights: ["Co-chair of Paul Weiss Antitrust Practice", "Lead counsel in sports antitrust cases", "Former Chief of Staff to White House Counsel", "Argued before U.S. Supreme Court"],
+                    strategic_value: "Elite appellate advocate and policy expert for complex antitrust matters",
+                    website: "https://www.paulweiss.com",
+                    locations: ["Washington, D.C.", "New York"]
+                }
+            ],
+            aiExperts: [
+                {
+                    id: "aiml_001",
+                    name: "Ilya Sutskever",
+                    org: "OpenAI (Former Chief Scientist)",
+                    category: "ai_ml",
+                    expertise: ["Foundation models", "Deep learning architecture", "Large language models", "AI safety and alignment"],
+                    highlights: ["Co-founder and former Chief Scientist at OpenAI", "Pioneer of deep learning models", "Key architect behind GPT series", "PhD under Geoffrey Hinton"],
+                    strategic_value: "World-leading expert on foundation models and AI capabilities assessment"
+                },
+                {
+                    id: "aiml_002",
+                    name: "Yann LeCun",
+                    org: "Meta AI",
+                    category: "ai_ml",
+                    expertise: ["Convolutional neural networks", "Computer vision", "Self-supervised learning", "Autonomous systems"],
+                    highlights: ["Chief AI Scientist at Meta", "Turing Award winner (2018)", "Father of convolutional neural networks", "Professor at NYU"],
+                    strategic_value: "Foundational authority on AI architectures and autonomous systems"
+                },
+                {
+                    id: "aiml_003",
+                    name: "Jeff Dean",
+                    org: "Google",
+                    category: "ai_ml",
+                    expertise: ["Large-scale distributed systems", "TensorFlow architecture", "Enterprise AI deployment", "ML infrastructure"],
+                    highlights: ["Chief Scientist at Google DeepMind", "Co-creator of TensorFlow", "Architect of Google's TPU systems", "National Academy of Engineering member"],
+                    strategic_value: "Expert witness on AI systems architecture and enterprise deployment"
+                },
+                {
+                    id: "aiml_004",
+                    name: "Marc Raibert",
+                    org: "Boston Dynamics",
+                    category: "ai_ml",
+                    expertise: ["Robotics and legged locomotion", "Dynamic robot control", "AI-powered robotics", "Commercial robotics"],
+                    highlights: ["Founder of Boston Dynamics", "Pioneer in dynamic legged robots", "Creator of Spot, Atlas, Stretch robots", "Former MIT professor"],
+                    strategic_value: "Leading authority on commercial robotics and AI integration"
+                },
+                {
+                    id: "aiml_005",
+                    name: "Brett Adcock",
+                    org: "Figure AI",
+                    category: "ai_ml",
+                    expertise: ["Humanoid robotics", "AI-powered automation", "Autonomous systems", "Enterprise robotics"],
+                    highlights: ["Founder and CEO of Figure AI", "Serial entrepreneur in AI/robotics", "Former founder of Archer Aviation", "Pioneer in humanoid robots"],
+                    strategic_value: "Expert on next-generation robotics and workforce automation"
+                },
+                {
+                    id: "aiml_006",
+                    name: "Dario Amodei",
+                    org: "Anthropic",
+                    category: "ai_ml",
+                    expertise: ["AI safety", "Constitutional AI", "Large language models", "AI governance"],
+                    highlights: ["CEO and Co-founder of Anthropic", "Former VP of Research at OpenAI", "Pioneer in AI safety research", "Creator of Claude AI systems"],
+                    strategic_value: "Expert on AI safety, governance, and responsible development"
+                },
+                {
+                    id: "aiml_007",
+                    name: "Fei-Fei Li",
+                    org: "Stanford University",
+                    category: "ai_ml",
+                    expertise: ["Computer vision", "ImageNet and datasets", "AI in healthcare", "Human-centered AI"],
+                    highlights: ["Co-Director of Stanford HAI", "Creator of ImageNet database", "Former VP at Google Cloud", "National Academy of Engineering member"],
+                    strategic_value: "Authority on AI datasets, ethics, and human-centered AI development"
+                },
+                {
+                    id: "aiml_008",
+                    name: "Demis Hassabis",
+                    org: "Google DeepMind",
+                    category: "ai_ml",
+                    expertise: ["Artificial general intelligence", "AlphaFold", "Reinforcement learning", "AI for scientific discovery"],
+                    highlights: ["CEO and Co-founder of DeepMind", "Creator of AlphaGo and AlphaFold", "Nobel Prize in Chemistry (2024)", "Pioneer in AGI research"],
+                    strategic_value: "World-leading expert on AGI and AI for scientific breakthrough applications"
+                }
+            ],
+            neo4jExperts: [
+                {
+                    id: "neo4j_001",
+                    name: "Michael Hunger",
+                    org: "Neo4j",
+                    category: "neo4j",
+                    expertise: ["Graph database architecture", "Cypher query optimization", "Neo4j ecosystem", "Graph data modeling"],
+                    highlights: ["Developer Relations Lead at Neo4j", "Co-author of Neo4j books", "Creator of APOC library", "20+ years software experience"],
+                    use_cases: ["Conspiracy network mapping", "Communication pattern analysis", "Entity relationship visualization"],
+                    strategic_value: "Expert in graph database implementation for complex relationship analysis"
+                },
+                {
+                    id: "neo4j_002",
+                    name: "Jim Webber",
+                    org: "Neo4j",
+                    category: "neo4j",
+                    expertise: ["Graph database theory", "Distributed systems", "Neo4j core architecture", "Graph algorithms"],
+                    highlights: ["Chief Scientist at Neo4j", "Co-author of 'Graph Databases'", "PhD in Computer Science", "Pioneer in graph technology"],
+                    use_cases: ["Large-scale graph analytics", "Enterprise investigation systems", "Evidence chain analysis"],
+                    strategic_value: "Technical authority on graph database scalability and enterprise deployment"
+                },
+                {
+                    id: "neo4j_003",
+                    name: "Nigel Small",
+                    org: "Neo4j",
+                    category: "neo4j",
+                    expertise: ["Neo4j drivers", "Python graph programming", "Graph database integration", "Query optimization"],
+                    highlights: ["Senior Engineer at Neo4j", "Creator of py2neo library", "Neo4j driver developer", "Open source contributor"],
+                    use_cases: ["Custom investigation tools", "Graph-based search systems", "Evidence network construction"],
+                    strategic_value: "Expert in custom graph application development for investigations"
+                },
+                {
+                    id: "neo4j_004",
+                    name: "Stefan Armbruster",
+                    org: "Neo4j",
+                    category: "neo4j",
+                    expertise: ["Graph data science", "Machine learning on graphs", "Neo4j plugins", "Enterprise consulting"],
+                    highlights: ["Senior Consultant at Neo4j", "Graph data science expert", "Neo4j extension developer", "Technical trainer"],
+                    use_cases: ["Predictive relationship analysis", "Pattern detection in networks", "Fraud and conspiracy detection"],
+                    strategic_value: "Expert in applying graph data science to detect hidden patterns"
+                },
+                {
+                    id: "neo4j_005",
+                    name: "Will Lyon",
+                    org: "Neo4j",
+                    category: "neo4j",
+                    expertise: ["GraphQL and Neo4j", "Full-stack graph apps", "GRANDstack", "Graph visualization"],
+                    highlights: ["Developer Relations Engineer", "Author of GraphQL book", "Creator of Neo4j GraphQL library", "Technical content creator"],
+                    use_cases: ["Interactive investigation dashboards", "Real-time visualization", "Collaborative investigation tools"],
+                    strategic_value: "Expert in building interactive graph visualization tools for litigation"
+                },
+                {
+                    id: "neo4j_006",
+                    name: "Amy Hodler",
+                    org: "Neo4j (Former)",
+                    category: "neo4j",
+                    expertise: ["Graph analytics", "Network analysis algorithms", "Fraud detection", "Influence mapping"],
+                    highlights: ["Former Director of Graph Analytics", "Co-author of 'Graph Algorithms'", "Fraud detection specialist", "Industry thought leader"],
+                    use_cases: ["Influence network analysis", "Money flow tracing", "Corporate relationship mapping"],
+                    strategic_value: "Expert in graph analytics for fraud detection and influence mapping"
+                },
+                {
+                    id: "neo4j_007",
+                    name: "Mark Needham",
+                    org: "Neo4j (Former)",
+                    category: "neo4j",
+                    expertise: ["Data science with graphs", "Graph embeddings", "NLP on graphs", "Knowledge graphs"],
+                    highlights: ["Former Developer Relations Engineer", "Co-author of 'Graph Algorithms'", "Knowledge graph expert", "Data science content creator"],
+                    use_cases: ["Knowledge graph construction", "Entity extraction and linking", "Document network analysis"],
+                    strategic_value: "Expert in knowledge graph construction for document-based investigations"
+                }
+            ],
+            lawSchools: [
+                {
+                    id: "school_001",
+                    name: "Georgetown University Law Center",
+                    org: "Washington, D.C.",
+                    category: "law_schools",
+                    clinics: 17,
+                    scotus_wins: 4,
+                    highlights: ["17 specialized legal clinics", "4 Supreme Court victories", "Multiple former DOJ officials on faculty", "Top antitrust policy program"],
+                    notable_programs: ["Antitrust Law Clinic", "Supreme Court Institute", "Appellate Litigation Clinic"],
+                    strategic_value: "Premier policy-focused law school with strong antitrust clinical programs"
+                },
+                {
+                    id: "school_002",
+                    name: "UC Law San Francisco",
+                    org: "San Francisco, CA",
+                    category: "law_schools",
+                    highlights: ["Strong technology law focus", "Silicon Valley connections", "Innovation and startup clinics", "Emerging technology expertise"],
+                    notable_programs: ["Startup Legal Garage", "Innovation Clinic", "Center for Innovation"],
+                    strategic_value: "Strong technology focus with Silicon Valley industry connections"
+                },
+                {
+                    id: "school_003",
+                    name: "Columbia Law School",
+                    org: "New York, NY",
+                    category: "law_schools",
+                    ranking: "#4 US News",
+                    highlights: ["Top 5 national ranking", "Leading corporate law program", "Wall Street proximity", "Strong antitrust scholarship"],
+                    notable_programs: ["Center for Law and Economic Studies", "Millstein Center", "Entrepreneurship Clinic"],
+                    strategic_value: "Elite corporate and antitrust scholarship with Wall Street proximity"
+                },
+                {
+                    id: "school_004",
+                    name: "Harvard Law School",
+                    org: "Cambridge, MA",
+                    category: "law_schools",
+                    ranking: "#3 US News",
+                    highlights: ["Top 3 national ranking", "Unmatched alumni network", "Former Solicitor General faculty", "Leading constitutional scholars"],
+                    notable_programs: ["Berkman Klein Center", "Cyberlaw Clinic", "Program on Corporate Governance"],
+                    strategic_value: "Preeminent legal scholarship with unmatched alumni network"
+                },
+                {
+                    id: "school_005",
+                    name: "NYU School of Law",
+                    org: "New York, NY",
+                    category: "law_schools",
+                    ranking: "#6 US News",
+                    highlights: ["Top 6 national ranking", "#1 Tax Law program", "Technology law pioneers", "Strong antitrust focus"],
+                    notable_programs: ["Engelberg Center on Innovation", "Technology Law Clinic", "Brennan Center"],
+                    strategic_value: "Leading technology law program with strong antitrust focus"
+                }
+            ],
+            cases: [
+                {
+                    id: "case_001",
+                    name: "United States v. DaVita Inc.",
+                    org: "2022 • Criminal Antitrust",
+                    category: "legal_cases",
+                    type: "Criminal Labor Allocation",
+                    highlights: ["Criminal no-poach agreement prosecution", "Labor market allocation case", "Individual executive liability", "DOJ criminal enforcement precedent"],
+                    outcome: "Mixed verdict; established precedent for criminal labor market cases",
+                    precedents: ["Affirmed DOJ's authority for criminal labor cases", "Framework for proving no-poach conspiracies", "Guidance on jury instructions"],
+                    strategic_value: "Critical precedent for criminal antitrust prosecution in labor markets"
+                },
+                {
+                    id: "case_002",
+                    name: "United States v. Microsoft",
+                    org: "2001 • Civil Monopolization",
+                    category: "legal_cases",
+                    type: "Section 2 Sherman Act",
+                    highlights: ["Landmark monopolization case", "Technology market definition standards", "Tying arrangement analysis", "Remedy design for tech monopolies"],
+                    outcome: "Liability found; consent decree imposed",
+                    precedents: ["Framework for technology market definition", "Standards for monopoly maintenance", "Approach to tech remedies"],
+                    strategic_value: "Foundational precedent for technology sector antitrust enforcement"
+                },
+                {
+                    id: "case_003",
+                    name: "United States v. AT&T",
+                    org: "1984 • Divestiture",
+                    category: "legal_cases",
+                    type: "Structural Remedy",
+                    highlights: ["Historic telecommunications breakup", "Natural monopoly regulation", "Essential facilities doctrine", "Structural remedy model"],
+                    outcome: "Consent decree requiring divestiture into regional Bell companies",
+                    precedents: ["Model for structural remedies", "Essential facilities framework", "Regulated industry antitrust"],
+                    strategic_value: "Historic precedent for structural breakup remedies"
+                },
+                {
+                    id: "case_004",
+                    name: "United States v. Singer",
+                    org: "1963 • Criminal Conspiracy",
+                    category: "legal_cases",
+                    type: "Patent-Antitrust",
+                    highlights: ["Patent procurement fraud", "Conspiracy to monopolize", "Patent-antitrust interface", "International coordination"],
+                    outcome: "Conviction affirmed; established conspiracy through patent manipulation",
+                    precedents: ["Standards for patent-antitrust violations", "IP-based conspiracy framework", "International antitrust coordination"],
+                    strategic_value: "Key precedent for IP-based antitrust conspiracies"
+                },
+                {
+                    id: "case_005",
+                    name: "United States v. DuPont (Cellophane)",
+                    org: "1956 • Market Definition",
+                    category: "legal_cases",
+                    type: "Monopolization",
+                    highlights: ["Reasonable interchangeability test", "Cross-elasticity of demand", "Monopoly power determination", "Substitute product analysis"],
+                    outcome: "Du Pont acquitted; narrow market rejected",
+                    precedents: ["Reasonable interchangeability standard", "Cross-elasticity analysis", "Foundation for market definition"],
+                    strategic_value: "Foundational precedent for relevant market analysis"
+                },
+                {
+                    id: "case_006",
+                    name: "United States v. Alcoa",
+                    org: "1945 • Monopolization",
+                    category: "legal_cases",
+                    type: "Section 2 Sherman Act",
+                    highlights: ["90%+ market share presumption", "Intent not required", "Capacity expansion as exclusion", "Foundation for Section 2"],
+                    outcome: "Liability found; Alcoa held to have monopolized aluminum market",
+                    precedents: ["90%+ market share creates monopoly presumption", "Intent not required for liability", "Cornerstone of Section 2 law"],
+                    strategic_value: "Cornerstone precedent for monopolization liability standards"
+                },
+                {
+                    id: "case_007",
+                    name: "FTC v. Qualcomm",
+                    org: "2020 • Technology Licensing",
+                    category: "legal_cases",
+                    type: "FRAND / Monopolization",
+                    highlights: ["FRAND licensing obligations", "Patent hold-up concerns", "Chip licensing practices", "FTC Section 5 limits"],
+                    outcome: "FTC loss on appeal; Qualcomm practices upheld",
+                    precedents: ["Limits on FTC Section 5 authority", "Technology licensing standards", "FRAND enforcement approach"],
+                    strategic_value: "Key precedent for technology licensing antitrust boundaries"
+                },
+                {
+                    id: "case_008",
+                    name: "Epic Games v. Apple",
+                    org: "2021-2023 • Platform Monopolization",
+                    category: "legal_cases",
+                    type: "Tying / Monopolization",
+                    highlights: ["Platform market definition", "App store tying claims", "Digital payment restrictions", "Developer relationship antitrust"],
+                    outcome: "Mixed; anti-steering provisions struck down, core practices upheld",
+                    precedents: ["Digital platform market definition", "App store tying standards", "Platform antitrust framework"],
+                    strategic_value: "Leading precedent for digital platform antitrust litigation"
+                }
+            ]
+        };
+
+        // Render Functions
+        function renderAttorneyCard(attorney) {
+            return `
+                <div class="profile-card" data-category="${attorney.category}" data-searchable="${attorney.name.toLowerCase()} ${attorney.org.toLowerCase()} ${attorney.expertise.join(' ').toLowerCase()}">
+                    <div class="card-header ${attorney.category}">
+                        <div class="profile-name">${attorney.name}</div>
+                        <div class="profile-org">${attorney.org}</div>
+                        <span class="experience-badge">${attorney.experience}</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="expertise-section">
+                            <div class="section-title">Expertise</div>
+                            <div class="expertise-tags">
+                                ${attorney.expertise.map(e => `<span class="expertise-tag">${e}</span>`).join('')}
+                            </div>
+                        </div>
+                        <div class="card-details">
+                            <div class="highlights-section">
+                                <div class="section-title">Key Highlights</div>
+                                <ul class="highlights-list" role="list">
+                                    ${attorney.highlights.map(h => `<li>${h}</li>`).join('')}
+                                </ul>
+                            </div>
+                            <div class="strategic-value">${attorney.strategic_value}</div>
+                            ${attorney.website ? `
+                            <div class="contact-info">
+                                <a href="${attorney.website}" target="_blank" rel="noopener noreferrer" class="contact-link" title="Visit ${attorney.org} website (opens in new tab)">Visit Firm Website</a>
+                                <span class="locations">${attorney.locations.join(', ')}</span>
+                            </div>
+                            ` : ''}
+                        </div>
+                        <button class="expand-btn" onclick="toggleDetails(this)" aria-expanded="false">Show Details</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderAIExpertCard(expert) {
+            return `
+                <div class="profile-card" data-category="${expert.category}" data-searchable="${expert.name.toLowerCase()} ${expert.org.toLowerCase()} ${expert.expertise.join(' ').toLowerCase()}">
+                    <div class="card-header ${expert.category}">
+                        <div class="profile-name">${expert.name}</div>
+                        <div class="profile-org">${expert.org}</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="expertise-section">
+                            <div class="section-title">Expertise</div>
+                            <div class="expertise-tags">
+                                ${expert.expertise.map(e => `<span class="expertise-tag">${e}</span>`).join('')}
+                            </div>
+                        </div>
+                        <div class="card-details">
+                            <div class="highlights-section">
+                                <div class="section-title">Key Highlights</div>
+                                <ul class="highlights-list" role="list">
+                                    ${expert.highlights.map(h => `<li>${h}</li>`).join('')}
+                                </ul>
+                            </div>
+                            <div class="strategic-value">${expert.strategic_value}</div>
+                        </div>
+                        <button class="expand-btn" onclick="toggleDetails(this)" aria-expanded="false">Show Details</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderNeo4jExpertCard(expert) {
+            return `
+                <div class="profile-card" data-category="${expert.category}" data-searchable="${expert.name.toLowerCase()} ${expert.org.toLowerCase()} ${expert.expertise.join(' ').toLowerCase()} ${expert.use_cases.join(' ').toLowerCase()}">
+                    <div class="card-header ${expert.category}">
+                        <div class="profile-name">${expert.name}</div>
+                        <div class="profile-org">${expert.org}</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="expertise-section">
+                            <div class="section-title">Expertise</div>
+                            <div class="expertise-tags">
+                                ${expert.expertise.map(e => `<span class="expertise-tag">${e}</span>`).join('')}
+                            </div>
+                        </div>
+                        <div class="card-details">
+                            <div class="highlights-section">
+                                <div class="section-title">Key Highlights</div>
+                                <ul class="highlights-list" role="list">
+                                    ${expert.highlights.map(h => `<li>${h}</li>`).join('')}
+                                </ul>
+                            </div>
+                            <div class="highlights-section">
+                                <div class="section-title">Litigation Use Cases</div>
+                                <ul class="highlights-list" role="list">
+                                    ${expert.use_cases.map(u => `<li>${u}</li>`).join('')}
+                                </ul>
+                            </div>
+                            <div class="strategic-value">${expert.strategic_value}</div>
+                        </div>
+                        <button class="expand-btn" onclick="toggleDetails(this)" aria-expanded="false">Show Details</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderSchoolCard(school) {
+            return `
+                <div class="profile-card" data-category="${school.category}" data-searchable="${school.name.toLowerCase()} ${school.org.toLowerCase()} ${school.notable_programs.join(' ').toLowerCase()}">
+                    <div class="card-header ${school.category}">
+                        <div class="profile-name">${school.name}</div>
+                        <div class="profile-org">${school.org}</div>
+                        ${school.ranking ? `<span class="experience-badge">${school.ranking}</span>` : ''}
+                        ${school.clinics ? `<span class="experience-badge">${school.clinics} Clinics • ${school.scotus_wins} SCOTUS Wins</span>` : ''}
+                    </div>
+                    <div class="card-body">
+                        <div class="expertise-section">
+                            <div class="section-title">Notable Programs</div>
+                            <div class="expertise-tags">
+                                ${school.notable_programs.map(p => `<span class="expertise-tag">${p}</span>`).join('')}
+                            </div>
+                        </div>
+                        <div class="card-details">
+                            <div class="highlights-section">
+                                <div class="section-title">Key Highlights</div>
+                                <ul class="highlights-list" role="list">
+                                    ${school.highlights.map(h => `<li>${h}</li>`).join('')}
+                                </ul>
+                            </div>
+                            <div class="strategic-value">${school.strategic_value}</div>
+                        </div>
+                        <button class="expand-btn" onclick="toggleDetails(this)" aria-expanded="false">Show Details</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderCaseCard(legalCase) {
+            return `
+                <div class="profile-card" data-category="${legalCase.category}" data-searchable="${legalCase.name.toLowerCase()} ${legalCase.type.toLowerCase()} ${legalCase.highlights.join(' ').toLowerCase()}">
+                    <div class="card-header ${legalCase.category}">
+                        <div class="profile-name">${legalCase.name}</div>
+                        <div class="profile-org">${legalCase.org}</div>
+                        <span class="case-type">${legalCase.type}</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="case-outcome">
+                            <strong>Outcome:</strong> ${legalCase.outcome}
+                        </div>
+                        <div class="card-details">
+                            <div class="highlights-section">
+                                <div class="section-title">Key Issues</div>
+                                <ul class="highlights-list" role="list">
+                                    ${legalCase.highlights.map(h => `<li>${h}</li>`).join('')}
+                                </ul>
+                            </div>
+                            <div class="precedent-list">
+                                <div class="section-title">Precedent Value</div>
+                                <ul role="list">
+                                    ${legalCase.precedents.map(p => `<li>${p}</li>`).join('')}
+                                </ul>
+                            </div>
+                            <div class="strategic-value">${legalCase.strategic_value}</div>
+                        </div>
+                        <button class="expand-btn" onclick="toggleDetails(this)" aria-expanded="false">Show Details</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Toggle card details
+        function toggleDetails(btn) {
+            const details = btn.previousElementSibling;
+            const isExpanded = details.classList.contains('expanded');
+            if (isExpanded) {
+                details.classList.remove('expanded');
+                btn.textContent = 'Show Details';
+                btn.setAttribute('aria-expanded', 'false');
+            } else {
+                details.classList.add('expanded');
+                btn.textContent = 'Hide Details';
+                btn.setAttribute('aria-expanded', 'true');
+            }
+        }
+
+        // Initialize Dashboard
+        function initDashboard() {
+            // Render all cards
+            document.getElementById('antitrust-grid').innerHTML = expertsData.attorneys.map(renderAttorneyCard).join('');
+            document.getElementById('aiml-grid').innerHTML = expertsData.aiExperts.map(renderAIExpertCard).join('');
+            document.getElementById('neo4j-grid').innerHTML = expertsData.neo4jExperts.map(renderNeo4jExpertCard).join('');
+            document.getElementById('schools-grid').innerHTML = expertsData.lawSchools.map(renderSchoolCard).join('');
+            document.getElementById('cases-grid').innerHTML = expertsData.cases.map(renderCaseCard).join('');
+
+            // Setup filter buttons
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Update active state
+                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+
+                    const filter = btn.dataset.filter;
+                    filterCards(filter);
+                });
+            });
+
+            // Setup search
+            document.getElementById('searchInput').addEventListener('input', (e) => {
+                searchCards(e.target.value);
+            });
+        }
+
+        function filterCards(category) {
+            const sections = document.querySelectorAll('.category-section');
+            const recommendations = document.getElementById('recommendations');
+
+            if (category === 'all') {
+                sections.forEach(s => s.style.display = 'block');
+                recommendations.style.display = 'block';
+            } else {
+                sections.forEach(s => {
+                    if (s.dataset.category === category) {
+                        s.style.display = 'block';
+                    } else {
+                        s.style.display = 'none';
+                    }
+                });
+                recommendations.style.display = category === 'all' ? 'block' : 'none';
+            }
+        }
+
+        function searchCards(query) {
+            const lowerQuery = query.toLowerCase().trim();
+            const cards = document.querySelectorAll('.profile-card');
+
+            cards.forEach(card => {
+                const searchable = card.dataset.searchable || '';
+                if (lowerQuery === '' || searchable.includes(lowerQuery)) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+
+            // Show all sections when searching
+            if (lowerQuery !== '') {
+                document.querySelectorAll('.category-section').forEach(s => s.style.display = 'block');
+                // Reset filter buttons
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                document.querySelector('.filter-btn[data-filter="all"]').classList.add('active');
+            }
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', initDashboard);
+    </script>
+</body>
+</html>

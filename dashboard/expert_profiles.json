@@ -1,0 +1,959 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "last_updated": "2024-12-01",
+    "description": "Expert Profiles Dashboard for Antitrust Litigation Strategy",
+    "categories": ["antitrust", "ai_ml", "neo4j", "law_schools", "legal_cases"]
+  },
+  "elite_antitrust_attorneys": [
+    {
+      "id": "attorney_001",
+      "name": "Barry Barnett",
+      "firm": "Susman Godfrey",
+      "category": "antitrust",
+      "experience_years": 40,
+      "expertise": [
+        "Complex antitrust litigation",
+        "Fortune 500 corporate disputes",
+        "Class action defense",
+        "Trial advocacy",
+        "Appellate practice"
+      ],
+      "highlights": [
+        "40+ years of elite antitrust litigation experience",
+        "Successfully battled Fortune 500 corporations in landmark cases",
+        "Nationally recognized trial lawyer",
+        "Expertise in Sherman Act and Clayton Act litigation",
+        "Former law clerk for federal appellate judge"
+      ],
+      "notable_cases": [
+        "Major price-fixing class actions",
+        "Monopolization cases against tech giants",
+        "Merger challenges and Hart-Scott-Rodino proceedings"
+      ],
+      "contact": {
+        "firm_website": "https://www.susmangodfrey.com",
+        "office_locations": ["Houston", "Los Angeles", "New York", "Seattle"]
+      },
+      "strategic_value": "Premier trial lawyer for high-stakes antitrust litigation against major corporations"
+    },
+    {
+      "id": "attorney_002",
+      "name": "Derek Ho",
+      "firm": "Kellogg Hansen",
+      "category": "antitrust",
+      "experience_years": 25,
+      "expertise": [
+        "Preliminary injunction litigation",
+        "Merger antitrust review",
+        "FTC and DOJ investigations",
+        "Complex commercial litigation",
+        "Antitrust counseling"
+      ],
+      "highlights": [
+        "Landmark preliminary injunction victories in antitrust matters",
+        "Expert in merger review and clearance processes",
+        "Recognized authority on vertical restraints",
+        "Former DOJ Antitrust Division attorney",
+        "Published extensively on antitrust enforcement"
+      ],
+      "notable_cases": [
+        "Successful preliminary injunctions blocking anticompetitive mergers",
+        "Defense of major technology company acquisitions",
+        "Price discrimination litigation under Robinson-Patman Act"
+      ],
+      "contact": {
+        "firm_website": "https://www.kellogghansen.com",
+        "office_locations": ["Washington, D.C."]
+      },
+      "strategic_value": "Expert in preliminary relief and emergency antitrust motions"
+    },
+    {
+      "id": "attorney_003",
+      "name": "John Walsh",
+      "firm": "WilmerHale",
+      "category": "antitrust",
+      "experience_years": 35,
+      "expertise": [
+        "Criminal antitrust defense",
+        "White-collar criminal defense",
+        "Cartel investigations",
+        "Grand jury proceedings",
+        "Corporate compliance"
+      ],
+      "highlights": [
+        "First-ever criminal antitrust acquittal in DOJ history",
+        "Leading expert in criminal cartel defense",
+        "Former federal prosecutor with DOJ Antitrust Division",
+        "Pioneer in antitrust compliance programs",
+        "Adviser to Fortune 100 companies on antitrust risk"
+      ],
+      "notable_cases": [
+        "Historic acquittal in criminal price-fixing case",
+        "Defense of executives in international cartel investigations",
+        "Negotiation of favorable plea agreements in major cartel cases"
+      ],
+      "contact": {
+        "firm_website": "https://www.wilmerhale.com",
+        "office_locations": ["Washington, D.C.", "Boston", "New York", "Los Angeles"]
+      },
+      "strategic_value": "Unparalleled criminal antitrust defense expertise with proven trial success"
+    },
+    {
+      "id": "attorney_004",
+      "name": "Carlos Rainer",
+      "firm": "Norton Rose Fulbright",
+      "category": "antitrust",
+      "experience_years": 28,
+      "expertise": [
+        "High-value antitrust disputes",
+        "International antitrust coordination",
+        "Damages quantification",
+        "Expert witness coordination",
+        "Discovery management"
+      ],
+      "highlights": [
+        "Handles $10M-$100M+ antitrust disputes regularly",
+        "Expert in complex damages calculations",
+        "Multi-jurisdictional antitrust case coordination",
+        "Strong relationships with economic experts",
+        "Track record of favorable settlements"
+      ],
+      "notable_cases": [
+        "Multi-hundred million dollar antitrust settlements",
+        "International price-fixing investigations",
+        "Private antitrust actions in technology sector"
+      ],
+      "contact": {
+        "firm_website": "https://www.nortonrosefulbright.com",
+        "office_locations": ["Houston", "Washington, D.C.", "Dallas", "Austin"]
+      },
+      "strategic_value": "Expert in high-value disputes with strong economic expert network"
+    },
+    {
+      "id": "attorney_005",
+      "name": "Eric Cramer",
+      "firm": "Berger Montague",
+      "category": "antitrust",
+      "experience_years": 30,
+      "expertise": [
+        "Antitrust class actions",
+        "Multi-district litigation",
+        "Settlement negotiations",
+        "Consumer protection",
+        "Pharmaceutical antitrust"
+      ],
+      "highlights": [
+        "$9B+ in antitrust settlements nationally",
+        "Leading plaintiffs' antitrust class action attorney",
+        "Expert in pharmaceutical pay-for-delay cases",
+        "Recognized in Lawdragon 500 Leading Plaintiff Lawyers",
+        "Member of steering committees in major MDL proceedings"
+      ],
+      "notable_cases": [
+        "Billion-dollar pharmaceutical antitrust settlements",
+        "Major technology antitrust class actions",
+        "Consumer products price-fixing cases"
+      ],
+      "contact": {
+        "firm_website": "https://www.bergermontague.com",
+        "office_locations": ["Philadelphia", "Minneapolis", "San Diego"]
+      },
+      "strategic_value": "Exceptional track record in major antitrust settlements and class actions"
+    },
+    {
+      "id": "attorney_006",
+      "name": "William Isaacson",
+      "firm": "Paul Weiss",
+      "category": "antitrust",
+      "experience_years": 38,
+      "expertise": [
+        "Antitrust and competition law",
+        "Sports antitrust litigation",
+        "Technology sector antitrust",
+        "Merger litigation",
+        "Antitrust appellate practice"
+      ],
+      "highlights": [
+        "Co-chair of Paul Weiss Antitrust Practice",
+        "Lead counsel in major sports antitrust cases",
+        "Expert in labor market antitrust issues",
+        "Former Chief of Staff to White House Counsel",
+        "Argued before U.S. Supreme Court"
+      ],
+      "notable_cases": [
+        "Major sports league antitrust litigation",
+        "Technology platform monopolization cases",
+        "High-profile merger challenges"
+      ],
+      "contact": {
+        "firm_website": "https://www.paulweiss.com",
+        "office_locations": ["Washington, D.C.", "New York"]
+      },
+      "strategic_value": "Elite appellate advocate and policy expert for complex antitrust matters"
+    }
+  ],
+  "ai_ml_robotics_experts": [
+    {
+      "id": "aiml_001",
+      "name": "Ilya Sutskever",
+      "organization": "OpenAI (Former Chief Scientist)",
+      "category": "ai_ml",
+      "expertise": [
+        "Foundation models",
+        "Deep learning architecture",
+        "Large language models",
+        "Neural network training",
+        "AI safety and alignment"
+      ],
+      "highlights": [
+        "Co-founder and former Chief Scientist at OpenAI",
+        "Pioneer of deep learning and sequence-to-sequence models",
+        "Key architect behind GPT series of models",
+        "PhD from University of Toronto under Geoffrey Hinton",
+        "Cited researcher in machine learning"
+      ],
+      "research_areas": [
+        "Transformer architectures",
+        "Reinforcement learning from human feedback",
+        "AI alignment and safety",
+        "Scaling laws for neural networks"
+      ],
+      "strategic_value": "World-leading expert on foundation models and AI capabilities assessment"
+    },
+    {
+      "id": "aiml_002",
+      "name": "Yann LeCun",
+      "organization": "Meta AI",
+      "category": "ai_ml",
+      "expertise": [
+        "Convolutional neural networks",
+        "Computer vision",
+        "Self-supervised learning",
+        "Autonomous systems",
+        "Energy-based models"
+      ],
+      "highlights": [
+        "Chief AI Scientist at Meta",
+        "Turing Award winner (2018)",
+        "Father of convolutional neural networks",
+        "Professor at NYU",
+        "Pioneer in deep learning"
+      ],
+      "research_areas": [
+        "Self-supervised learning",
+        "World models for AI",
+        "Vision transformers",
+        "Autonomous AI systems"
+      ],
+      "strategic_value": "Foundational authority on AI architectures and autonomous systems"
+    },
+    {
+      "id": "aiml_003",
+      "name": "Jeff Dean",
+      "organization": "Google",
+      "category": "ai_ml",
+      "expertise": [
+        "Large-scale distributed systems",
+        "TensorFlow architecture",
+        "Enterprise AI deployment",
+        "Neural network infrastructure",
+        "Machine learning systems"
+      ],
+      "highlights": [
+        "Chief Scientist at Google DeepMind",
+        "Co-creator of TensorFlow",
+        "Architect of Google's TPU systems",
+        "Member of National Academy of Engineering",
+        "Pioneer in large-scale ML infrastructure"
+      ],
+      "research_areas": [
+        "Large-scale machine learning",
+        "AI infrastructure and systems",
+        "Multimodal learning",
+        "AI for science applications"
+      ],
+      "strategic_value": "Expert witness on AI systems architecture and enterprise deployment"
+    },
+    {
+      "id": "aiml_004",
+      "name": "Marc Raibert",
+      "organization": "Boston Dynamics",
+      "category": "ai_ml",
+      "expertise": [
+        "Robotics and legged locomotion",
+        "Dynamic robot control",
+        "AI-powered robotics",
+        "Robot perception",
+        "Commercial robotics applications"
+      ],
+      "highlights": [
+        "Founder of Boston Dynamics",
+        "Pioneer in dynamic legged robots",
+        "Creator of Spot, Atlas, and Stretch robots",
+        "Former MIT professor",
+        "Leader in commercial robotics deployment"
+      ],
+      "research_areas": [
+        "Dynamic balance and locomotion",
+        "Robot manipulation",
+        "AI perception for robots",
+        "Human-robot interaction"
+      ],
+      "strategic_value": "Leading authority on commercial robotics and AI integration"
+    },
+    {
+      "id": "aiml_005",
+      "name": "Brett Adcock",
+      "organization": "Figure AI",
+      "category": "ai_ml",
+      "expertise": [
+        "Humanoid robotics",
+        "AI-powered automation",
+        "Autonomous systems",
+        "Enterprise robotics",
+        "Robot learning"
+      ],
+      "highlights": [
+        "Founder and CEO of Figure AI",
+        "Serial entrepreneur in AI and robotics",
+        "Former founder of Archer Aviation",
+        "Pioneer in general-purpose humanoid robots",
+        "Leading commercial humanoid robot development"
+      ],
+      "research_areas": [
+        "Humanoid robot design",
+        "AI for physical labor automation",
+        "Robot learning and adaptation",
+        "Commercial robotics deployment"
+      ],
+      "strategic_value": "Expert on next-generation robotics and workforce automation"
+    },
+    {
+      "id": "aiml_006",
+      "name": "Dario Amodei",
+      "organization": "Anthropic",
+      "category": "ai_ml",
+      "expertise": [
+        "AI safety",
+        "Constitutional AI",
+        "Large language models",
+        "AI alignment research",
+        "AI governance"
+      ],
+      "highlights": [
+        "CEO and Co-founder of Anthropic",
+        "Former VP of Research at OpenAI",
+        "Pioneer in AI safety research",
+        "Creator of Claude AI systems",
+        "Leader in responsible AI development"
+      ],
+      "research_areas": [
+        "Constitutional AI methods",
+        "AI interpretability",
+        "Harmlessness and helpfulness optimization",
+        "AI policy and governance"
+      ],
+      "strategic_value": "Expert on AI safety, governance, and responsible development"
+    },
+    {
+      "id": "aiml_007",
+      "name": "Fei-Fei Li",
+      "organization": "Stanford University / Google Cloud",
+      "category": "ai_ml",
+      "expertise": [
+        "Computer vision",
+        "ImageNet and datasets",
+        "AI in healthcare",
+        "Human-centered AI",
+        "AI ethics"
+      ],
+      "highlights": [
+        "Co-Director of Stanford Human-Centered AI Institute",
+        "Creator of ImageNet database",
+        "Former VP and Chief Scientist at Google Cloud",
+        "Member of National Academy of Engineering",
+        "Pioneer in visual recognition AI"
+      ],
+      "research_areas": [
+        "Visual recognition systems",
+        "AI in healthcare applications",
+        "Human-centered AI design",
+        "AI ethics and policy"
+      ],
+      "strategic_value": "Authority on AI datasets, ethics, and human-centered AI development"
+    },
+    {
+      "id": "aiml_008",
+      "name": "Demis Hassabis",
+      "organization": "Google DeepMind",
+      "category": "ai_ml",
+      "expertise": [
+        "Artificial general intelligence",
+        "AlphaFold and protein folding",
+        "Reinforcement learning",
+        "AI for scientific discovery",
+        "Game-playing AI systems"
+      ],
+      "highlights": [
+        "CEO and Co-founder of DeepMind",
+        "Creator of AlphaGo and AlphaFold",
+        "Nobel Prize in Chemistry (2024)",
+        "Pioneer in AGI research",
+        "Child chess prodigy and game designer"
+      ],
+      "research_areas": [
+        "AGI development",
+        "AI for science",
+        "Reinforcement learning",
+        "Neural network architectures"
+      ],
+      "strategic_value": "World-leading expert on AGI and AI for scientific breakthrough applications"
+    }
+  ],
+  "neo4j_specialists": [
+    {
+      "id": "neo4j_001",
+      "name": "Michael Hunger",
+      "organization": "Neo4j",
+      "category": "neo4j",
+      "expertise": [
+        "Graph database architecture",
+        "Cypher query optimization",
+        "Neo4j ecosystem development",
+        "Graph data modeling",
+        "Developer advocacy"
+      ],
+      "highlights": [
+        "Developer Relations Lead at Neo4j",
+        "Co-author of multiple Neo4j books",
+        "Creator of APOC library",
+        "Graph database evangelist",
+        "20+ years of software development experience"
+      ],
+      "use_cases": [
+        "Conspiracy network mapping",
+        "Communication pattern analysis",
+        "Entity relationship visualization",
+        "Investigation data modeling"
+      ],
+      "strategic_value": "Expert in graph database implementation for complex relationship analysis"
+    },
+    {
+      "id": "neo4j_002",
+      "name": "Jim Webber",
+      "organization": "Neo4j",
+      "category": "neo4j",
+      "expertise": [
+        "Graph database theory",
+        "Distributed systems",
+        "Neo4j core architecture",
+        "Enterprise graph deployments",
+        "Graph algorithms"
+      ],
+      "highlights": [
+        "Chief Scientist at Neo4j",
+        "Co-author of 'Graph Databases' O'Reilly book",
+        "PhD in Computer Science",
+        "Pioneer in graph database technology",
+        "Expert in distributed graph systems"
+      ],
+      "use_cases": [
+        "Large-scale graph analytics",
+        "Enterprise investigation systems",
+        "Cross-organizational relationship mapping",
+        "Evidence chain analysis"
+      ],
+      "strategic_value": "Technical authority on graph database scalability and enterprise deployment"
+    },
+    {
+      "id": "neo4j_003",
+      "name": "Nigel Small",
+      "organization": "Neo4j",
+      "category": "neo4j",
+      "expertise": [
+        "Neo4j drivers and connectors",
+        "Python graph programming",
+        "Graph database integration",
+        "Query optimization",
+        "Data import/export"
+      ],
+      "highlights": [
+        "Senior Engineer at Neo4j",
+        "Creator of py2neo library",
+        "Expert in Neo4j driver development",
+        "Contributor to Neo4j open source",
+        "Graph database integration specialist"
+      ],
+      "use_cases": [
+        "Custom investigation tool development",
+        "Graph-based search systems",
+        "Document relationship extraction",
+        "Evidence network construction"
+      ],
+      "strategic_value": "Expert in custom graph application development for investigations"
+    },
+    {
+      "id": "neo4j_004",
+      "name": "Stefan Armbruster",
+      "organization": "Neo4j",
+      "category": "neo4j",
+      "expertise": [
+        "Graph data science",
+        "Machine learning on graphs",
+        "Neo4j plugins and extensions",
+        "Grails and Groovy integration",
+        "Enterprise consulting"
+      ],
+      "highlights": [
+        "Senior Consultant at Neo4j",
+        "Expert in graph data science pipelines",
+        "Developer of Neo4j extensions",
+        "Enterprise implementation specialist",
+        "Technical trainer and speaker"
+      ],
+      "use_cases": [
+        "Predictive relationship analysis",
+        "Pattern detection in corporate networks",
+        "Fraud and conspiracy detection",
+        "Machine learning on graph data"
+      ],
+      "strategic_value": "Expert in applying graph data science to detect hidden patterns"
+    },
+    {
+      "id": "neo4j_005",
+      "name": "Will Lyon",
+      "organization": "Neo4j",
+      "category": "neo4j",
+      "expertise": [
+        "GraphQL and Neo4j integration",
+        "Full-stack graph applications",
+        "GRANDstack development",
+        "Graph visualization",
+        "Web application development"
+      ],
+      "highlights": [
+        "Developer Relations Engineer at Neo4j",
+        "Author of 'Full Stack GraphQL Applications'",
+        "Creator of Neo4j GraphQL library",
+        "Expert in graph-based web applications",
+        "Technical content creator"
+      ],
+      "use_cases": [
+        "Interactive investigation dashboards",
+        "Real-time relationship visualization",
+        "Evidence exploration interfaces",
+        "Collaborative investigation tools"
+      ],
+      "strategic_value": "Expert in building interactive graph visualization tools for litigation"
+    },
+    {
+      "id": "neo4j_006",
+      "name": "Amy Hodler",
+      "organization": "Neo4j (Former)",
+      "category": "neo4j",
+      "expertise": [
+        "Graph analytics",
+        "Network analysis algorithms",
+        "Fraud detection",
+        "Influence mapping",
+        "Graph strategy consulting"
+      ],
+      "highlights": [
+        "Former Director of Graph Analytics at Neo4j",
+        "Co-author of 'Graph Algorithms' O'Reilly book",
+        "Expert in applied graph analytics",
+        "Fraud detection and network analysis specialist",
+        "Industry thought leader"
+      ],
+      "use_cases": [
+        "Influence network analysis",
+        "Money flow tracing",
+        "Corporate relationship mapping",
+        "Conspiracy pattern detection"
+      ],
+      "strategic_value": "Expert in graph analytics for fraud detection and influence mapping"
+    },
+    {
+      "id": "neo4j_007",
+      "name": "Mark Needham",
+      "organization": "Neo4j (Former)",
+      "category": "neo4j",
+      "expertise": [
+        "Data science with graphs",
+        "Graph embeddings",
+        "Natural language processing on graphs",
+        "Knowledge graphs",
+        "Graph neural networks"
+      ],
+      "highlights": [
+        "Former Developer Relations Engineer at Neo4j",
+        "Co-author of 'Graph Algorithms' book",
+        "Expert in knowledge graph construction",
+        "Data science content creator",
+        "Technical speaker and trainer"
+      ],
+      "use_cases": [
+        "Knowledge graph construction from documents",
+        "Entity extraction and linking",
+        "Semantic relationship analysis",
+        "Document network analysis"
+      ],
+      "strategic_value": "Expert in knowledge graph construction for document-based investigations"
+    }
+  ],
+  "law_schools_research_centers": [
+    {
+      "id": "school_001",
+      "name": "Georgetown University Law Center",
+      "category": "law_schools",
+      "location": "Washington, D.C.",
+      "rankings": {
+        "us_news_overall": 14,
+        "specialization_antitrust": "Top 10"
+      },
+      "clinics_count": 17,
+      "scotus_wins": 4,
+      "notable_clinics": [
+        "Antitrust Law Clinic",
+        "Appellate Litigation Clinic",
+        "Supreme Court Institute",
+        "Institute for Public Representation"
+      ],
+      "research_centers": [
+        "Georgetown Center for Business and Public Policy",
+        "Institute for Technology Law & Policy"
+      ],
+      "faculty_highlights": [
+        "Multiple former DOJ Antitrust Division officials",
+        "SCOTUS practitioners and advocates",
+        "Leading antitrust scholars"
+      ],
+      "strategic_value": "Premier policy-focused law school with strong antitrust clinical programs"
+    },
+    {
+      "id": "school_002",
+      "name": "UC Law San Francisco (Hastings)",
+      "category": "law_schools",
+      "location": "San Francisco, CA",
+      "rankings": {
+        "us_news_overall": 57,
+        "specialization_ip_tech": "Top 20"
+      },
+      "notable_clinics": [
+        "Startup Legal Garage",
+        "Civil Justice Clinic",
+        "Innovation Clinic"
+      ],
+      "research_centers": [
+        "UC Hastings Center for Innovation",
+        "Institute for Innovation Law"
+      ],
+      "faculty_highlights": [
+        "Technology and IP law experts",
+        "Silicon Valley connections",
+        "Emerging technology specialists"
+      ],
+      "strategic_value": "Strong technology focus with Silicon Valley industry connections"
+    },
+    {
+      "id": "school_003",
+      "name": "Columbia Law School",
+      "category": "law_schools",
+      "location": "New York, NY",
+      "rankings": {
+        "us_news_overall": 4,
+        "specialization_corporate": "Top 5"
+      },
+      "notable_clinics": [
+        "Entrepreneurship & Innovation Clinic",
+        "Community Enterprise Clinic",
+        "Environmental Law Clinic"
+      ],
+      "research_centers": [
+        "Center for Law and Economic Studies",
+        "Millstein Center for Global Markets and Corporate Ownership"
+      ],
+      "faculty_highlights": [
+        "Leading antitrust and competition law scholars",
+        "Former SEC commissioners and staff",
+        "Corporate governance experts"
+      ],
+      "strategic_value": "Elite corporate and antitrust scholarship with Wall Street proximity"
+    },
+    {
+      "id": "school_004",
+      "name": "Harvard Law School",
+      "category": "law_schools",
+      "location": "Cambridge, MA",
+      "rankings": {
+        "us_news_overall": 3,
+        "specialization_constitutional": "Top 3"
+      },
+      "notable_clinics": [
+        "Cyberlaw Clinic",
+        "Environmental Law & Policy Clinic",
+        "Supreme Court and Appellate Clinic"
+      ],
+      "research_centers": [
+        "Berkman Klein Center for Internet & Society",
+        "Petrie-Flom Center for Health Law Policy",
+        "Program on Corporate Governance"
+      ],
+      "faculty_highlights": [
+        "Former Solicitor General and SCOTUS advocates",
+        "Leading constitutional scholars",
+        "Tech policy and antitrust experts"
+      ],
+      "strategic_value": "Preeminent legal scholarship with unmatched alumni network"
+    },
+    {
+      "id": "school_005",
+      "name": "NYU School of Law",
+      "category": "law_schools",
+      "location": "New York, NY",
+      "rankings": {
+        "us_news_overall": 6,
+        "specialization_tax": "Top 1"
+      },
+      "notable_clinics": [
+        "Technology Law & Policy Clinic",
+        "Antitrust Litigation Clinic",
+        "Brennan Center Justice Programs"
+      ],
+      "research_centers": [
+        "Institute for Policy Integrity",
+        "Engelberg Center on Innovation Law & Policy",
+        "Information Law Institute"
+      ],
+      "faculty_highlights": [
+        "Technology and innovation law pioneers",
+        "Data privacy and antitrust scholars",
+        "Former government officials"
+      ],
+      "strategic_value": "Leading technology law program with strong antitrust focus"
+    }
+  ],
+  "landmark_legal_cases": [
+    {
+      "id": "case_001",
+      "name": "United States v. DaVita Inc.",
+      "year": "2022",
+      "category": "legal_cases",
+      "type": "Criminal Antitrust",
+      "jurisdiction": "U.S. District Court, District of Colorado",
+      "summary": "Criminal prosecution for labor allocation conspiracy in healthcare industry",
+      "key_issues": [
+        "No-poach agreements",
+        "Labor market allocation",
+        "Criminal antitrust enforcement",
+        "Individual executive liability"
+      ],
+      "outcome": "Mixed verdict; established precedent for criminal labor market cases",
+      "precedent_value": [
+        "Affirmed DOJ's authority to bring criminal labor antitrust cases",
+        "Established framework for proving no-poach conspiracies",
+        "Guidance on jury instructions for labor market cases"
+      ],
+      "strategic_relevance": "Critical precedent for criminal antitrust prosecution in labor markets"
+    },
+    {
+      "id": "case_002",
+      "name": "United States v. Microsoft Corporation",
+      "year": "2001",
+      "category": "legal_cases",
+      "type": "Civil Monopolization",
+      "jurisdiction": "D.C. Circuit Court of Appeals",
+      "summary": "Landmark monopolization case establishing standards for Section 2 Sherman Act violations",
+      "key_issues": [
+        "Market definition in technology",
+        "Monopoly maintenance",
+        "Tying arrangements",
+        "Remedy design for tech monopolies"
+      ],
+      "outcome": "Liability found; consent decree imposed",
+      "precedent_value": [
+        "Framework for technology market definition",
+        "Standards for monopoly maintenance claims",
+        "Approach to remedies in technology cases"
+      ],
+      "strategic_relevance": "Foundational precedent for technology sector antitrust enforcement"
+    },
+    {
+      "id": "case_003",
+      "name": "United States v. AT&T (Original)",
+      "year": "1984",
+      "category": "legal_cases",
+      "type": "Civil Monopolization / Divestiture",
+      "jurisdiction": "U.S. District Court, District of Columbia",
+      "summary": "Historic breakup of telecommunications monopoly",
+      "key_issues": [
+        "Natural monopoly regulation",
+        "Vertical integration concerns",
+        "Structural remedies",
+        "Access to essential facilities"
+      ],
+      "outcome": "Consent decree requiring divestiture into regional Bell companies",
+      "precedent_value": [
+        "Model for structural remedies in monopolization cases",
+        "Framework for essential facilities doctrine",
+        "Approach to regulated industry antitrust"
+      ],
+      "strategic_relevance": "Historic precedent for structural breakup remedies"
+    },
+    {
+      "id": "case_004",
+      "name": "United States v. Singer Manufacturing Co.",
+      "year": "1963",
+      "category": "legal_cases",
+      "type": "Criminal Conspiracy",
+      "jurisdiction": "U.S. Supreme Court",
+      "summary": "Patent-antitrust intersection case involving conspiratorial patent procurement",
+      "key_issues": [
+        "Patent procurement fraud",
+        "Conspiracy to monopolize",
+        "Patent-antitrust interface",
+        "International antitrust coordination"
+      ],
+      "outcome": "Conviction affirmed; established conspiracy through patent manipulation",
+      "precedent_value": [
+        "Standards for proving patent-antitrust violations",
+        "Framework for analyzing IP-based conspiracies",
+        "Approach to international antitrust coordination"
+      ],
+      "strategic_relevance": "Key precedent for IP-based antitrust conspiracies"
+    },
+    {
+      "id": "case_005",
+      "name": "United States v. E.I. du Pont de Nemours & Co. (Cellophane)",
+      "year": "1956",
+      "category": "legal_cases",
+      "type": "Monopolization",
+      "jurisdiction": "U.S. Supreme Court",
+      "summary": "Landmark case establishing reasonable interchangeability test for market definition",
+      "key_issues": [
+        "Relevant market definition",
+        "Cross-elasticity of demand",
+        "Monopoly power determination",
+        "Substitute product analysis"
+      ],
+      "outcome": "Du Pont acquitted; narrow market rejected",
+      "precedent_value": [
+        "Reasonable interchangeability standard",
+        "Cross-elasticity of demand analysis",
+        "Foundation for modern market definition"
+      ],
+      "strategic_relevance": "Foundational precedent for relevant market analysis"
+    },
+    {
+      "id": "case_006",
+      "name": "United States v. Aluminum Co. of America (Alcoa)",
+      "year": "1945",
+      "category": "legal_cases",
+      "type": "Monopolization",
+      "jurisdiction": "Second Circuit Court of Appeals",
+      "summary": "Seminal case establishing that monopoly achieved through superior skill is not a defense",
+      "key_issues": [
+        "Monopoly intent vs. monopoly conduct",
+        "Market share thresholds",
+        "Geographic market definition",
+        "Capacity expansion as exclusionary conduct"
+      ],
+      "outcome": "Liability found; Alcoa held to have monopolized aluminum market",
+      "precedent_value": [
+        "Established 90%+ market share creates presumption of monopoly power",
+        "Intent not required for monopolization",
+        "Foundation for Section 2 jurisprudence"
+      ],
+      "strategic_relevance": "Cornerstone precedent for monopolization liability standards"
+    },
+    {
+      "id": "case_007",
+      "name": "FTC v. Qualcomm Inc.",
+      "year": "2020",
+      "category": "legal_cases",
+      "type": "Monopolization / Licensing",
+      "jurisdiction": "Ninth Circuit Court of Appeals",
+      "summary": "Major technology licensing case on FRAND commitments and chip monopolization",
+      "key_issues": [
+        "FRAND licensing obligations",
+        "Patent hold-up concerns",
+        "Chip licensing practices",
+        "Technology platform monopolization"
+      ],
+      "outcome": "FTC loss on appeal; Qualcomm practices upheld",
+      "precedent_value": [
+        "Limits on FTC Section 5 authority",
+        "Standards for technology licensing antitrust claims",
+        "Approach to FRAND obligation enforcement"
+      ],
+      "strategic_relevance": "Key precedent for technology licensing antitrust boundaries"
+    },
+    {
+      "id": "case_008",
+      "name": "Epic Games v. Apple",
+      "year": "2021-2023",
+      "category": "legal_cases",
+      "type": "Monopolization / Tying",
+      "jurisdiction": "Ninth Circuit Court of Appeals",
+      "summary": "Major platform monopolization case regarding app store policies and payment systems",
+      "key_issues": [
+        "Platform market definition",
+        "App store tying arrangements",
+        "Digital payment restrictions",
+        "Developer relationship antitrust"
+      ],
+      "outcome": "Mixed; anti-steering provisions struck down, core practices upheld",
+      "precedent_value": [
+        "Framework for digital platform market definition",
+        "Standards for app store tying claims",
+        "Approach to digital platform antitrust"
+      ],
+      "strategic_relevance": "Leading precedent for digital platform antitrust litigation"
+    }
+  ],
+  "strategic_recommendations": {
+    "litigation_team_building": {
+      "phase_1_core_team": {
+        "description": "Essential attorneys for case development and initial filings",
+        "recommended_profiles": [
+          "Barry Barnett - Lead trial counsel",
+          "Eric Cramer - Class action expertise",
+          "Derek Ho - Emergency relief and injunctions"
+        ]
+      },
+      "phase_2_criminal_defense": {
+        "description": "If criminal exposure exists, add specialized defense",
+        "recommended_profiles": [
+          "John Walsh - Criminal antitrust defense",
+          "Carlos Rainer - High-value dispute management"
+        ]
+      },
+      "phase_3_technical_analysis": {
+        "description": "Expert witnesses and technical support",
+        "recommended_profiles": [
+          "AI/ML experts for technology market analysis",
+          "Neo4j specialists for relationship mapping"
+        ]
+      }
+    },
+    "investigation_support": {
+      "document_analysis": {
+        "description": "Use GenAI for document summarization and pattern detection",
+        "tools": ["This Terraform solution for document processing", "Knowledge graph construction"]
+      },
+      "relationship_mapping": {
+        "description": "Build conspiracy networks using graph databases",
+        "tools": ["Neo4j for relationship visualization", "Graph algorithms for pattern detection"]
+      }
+    },
+    "research_partnerships": {
+      "description": "Engage law school research centers for specialized analysis",
+      "recommended_institutions": [
+        "Georgetown - Policy and regulatory analysis",
+        "Columbia - Economic and corporate governance",
+        "Harvard - Constitutional and appellate strategy"
+      ]
+    }
+  }
+}
