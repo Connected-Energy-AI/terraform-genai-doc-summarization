@@ -1,0 +1,13 @@
+name: terraform-genai-doc-summarization
+id: ari:cloud:compass:e29b3972-5b7f-44d2-8510-714877a8f85d:component/1eb1dfaa-66c7-4a0b-9ebe-b46258f905ca/35168a4a-b1d7-4870-b811-46bde4695c7c
+description: Summarizes document using OCR and Vertex Generative AI LLM
+configVersion: 1
+typeId: SERVICE
+fields:
+  tier: 4
+links: []
+relationships:
+  DEPENDS_ON: []
+labels:
+  - source:github
+customFields: null
