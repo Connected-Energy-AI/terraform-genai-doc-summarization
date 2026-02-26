@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expert Profiles Dashboard - Litigation Team Builder</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #3b82f6;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --border-color: #e2e8f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            margin-bottom: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .filter-section {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .filter-section h3 {
+            margin-bottom: 15px;
+            color: var(--text-primary);
+        }
+
+        .filter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            border: 2px solid var(--border-color);
+            background: var(--card-bg);
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            color: var(--text-primary);
+        }
+
+        .filter-btn:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+
+        .filter-btn.active {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+            color: white;
+        }
+
+        .category-section {
+            margin-bottom: 40px;
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .category-icon {
+            font-size: 1.5rem;
+            margin-right: 15px;
+        }
+
+        .category-title {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .category-count {
+            background: var(--accent-color);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-left: 15px;
+        }
+
+        .profiles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+        }
+
+        .profile-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .profile-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .profile-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .profile-info h4 {
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .profile-info .organization {
+            color: var(--accent-color);
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .profile-highlight {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-size: 0.9rem;
+            border-left: 4px solid var(--warning-color);
+        }
+
+        .expertise-list {
+            margin: 15px 0;
+        }
+
+        .expertise-list h5 {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .expertise-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .expertise-tag {
+            background: #e0f2fe;
+            color: #0369a1;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .contact-info {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .contact-info a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+
+        .case-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-color);
+            border-left: 5px solid var(--success-color);
+        }
+
+        .case-card h4 {
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+        }
+
+        .case-card .case-type {
+            display: inline-block;
+            background: #dcfce7;
+            color: #166534;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .case-card .case-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 10px;
+        }
+
+        .case-card .case-significance {
+            background: #f0fdf4;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        .school-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-color);
+            border-left: 5px solid var(--primary-color);
+        }
+
+        .school-card h4 {
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+        }
+
+        .school-stats {
+            display: flex;
+            gap: 15px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            background: #eff6ff;
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+        }
+
+        .stat-item strong {
+            color: var(--primary-color);
+        }
+
+        .recommendations-section {
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-top: 40px;
+        }
+
+        .recommendations-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .recommendation-list {
+            list-style: none;
+        }
+
+        .recommendation-list li {
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .recommendation-list li::before {
+            content: "✓";
+            background: var(--success-color);
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+            font-size: 0.8rem;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: var(--text-secondary);
+            margin-top: 40px;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            .profiles-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-buttons {
+                flex-direction: column;
+            }
+
+            .filter-btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎯 Expert Profiles Dashboard</h1>
+            <p>Build Your Elite Litigation Team - Antitrust, AI/ML, Neo4j & Legal Experts</p>
+        </header>
+
+        <section class="filter-section">
+            <h3>🔍 Filter by Category</h3>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All Experts</button>
+                <button class="filter-btn" data-filter="antitrust">⚖️ Antitrust Attorneys</button>
+                <button class="filter-btn" data-filter="aiml">🤖 AI/ML/Robotics</button>
+                <button class="filter-btn" data-filter="neo4j">🔗 Neo4j Specialists</button>
+                <button class="filter-btn" data-filter="schools">🏛️ Law Schools</button>
+                <button class="filter-btn" data-filter="cases">📚 Legal Cases</button>
+            </div>
+        </section>
+
+        <!-- Elite Antitrust Attorneys Section -->
+        <section class="category-section" data-category="antitrust">
+            <div class="category-header">
+                <span class="category-icon">⚖️</span>
+                <h2 class="category-title">Elite Antitrust Attorneys</h2>
+                <span class="category-count">6 profiles</span>
+            </div>
+            <div class="profiles-grid">
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <div class="profile-avatar">BB</div>
+                        <div class="profile-info">
+                            <h4>Barry Barnett</h4>
+                            <span class="organization">Susman Godfrey LLP</span>
+                        </div>
+                    </div>
+                    <div class="profile-highlight">
+                        🏆 40+ years of experience battling Fortune 500 corporations in complex antitrust litigation
+                    </div>
+                    <div class="expertise-list">
+                        <h5>Expertise</h5>
+                        <div class="expertise-tags">
+                            <span class="expertise-tag">Antitrust Litigation</span>
+                            <span class="expertise-tag">Class Actions</span>
+                            <span class="expertise-tag">Price Fixing</span>
+                            <span class="expertise-tag">Monopolization</span>
+                        </div>
+                    </div>
+                    <div class="contact-info">
+                        <a href="https://www.susmangodfrey.com" target="_blank">susmangodfrey.com</a>
+                    </div>
+                </div>
+
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <div class="profile-avatar">DH</div>
+                        <div class="profile-info">
+                            <h4>Derek Ho</h4>
+                            <span class="organization">Kellogg Hansen Todd Figel & Frederick</span>
+                        </div>
+                    </div>
+                    <div class="profile-highlight">
+                        ⚡ Landmark preliminary injunction victories in high-stakes antitrust disputes
+                    </div>
+                    <div class="expertise-list">
+                        <h5>Expertise</h5>
+                        <div class="expertise-tags">
+                            <span class="expertise-tag">Preliminary Injunctions</span>
+                            <span class="expertise-tag">Merger Challenges</span>
+                            <span class="expertise-tag">Sherman Act</span>
+                            <span class="expertise-tag">Appellate Advocacy</span>
+                        </div>
+                    </div>
+                    <div class="contact-info">
+                        <a href="https://www.kellogghansen.com" target="_blank">kellogghansen.com</a>
+                    </div>
+                </div>
+
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <div class="profile-avatar">JW</div>
+                        <div class="profile-info">
+                            <h4>John Walsh</h4>
+                            <span class="organization">WilmerHale</span>
+                        </div>
+                    </div>
+                    <div class="profile-highlight">
+                        🥇 First-ever criminal antitrust acquittal at trial - setting legal precedent
+                    </div>
+                    <div class="expertise-list">
+                        <h5>Expertise</h5>
+                        <div class="expertise-tags">
+                            <span class="expertise-tag">Criminal Antitrust</span>
+                            <span class="expertise-tag">DOJ Investigations</span>
+                            <span class="expertise-tag">Trial Defense</span>
+                            <span class="expertise-tag">Cartel Defense</span>
+                        </div>
+                    </div>
+                    <div class="contact-info">
+                        <a href="https://www.wilmerhale.com" target="_blank">wilmerhale.com</a>
+                    </div>
+                </div>
+
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <div class="profile-avatar">CR</div>
+                        <div class="profile-info">
+                            <h4>Carlos Rainer</h4>
+                            <span class="organization">Norton Rose Fulbright</span>
+                        </div>
+                    </div>
+                    <div class="profile-highlight">
+                        💰 Handles complex disputes ranging from $10M to $100M+ in antitrust matters
+                    </div>
+                    <div class="expertise-list">
+                        <h5>Expertise</h5>
+                        <div class="expertise-tags">
+                            <span class="expertise-tag">High-Value Disputes</span>
+                            <span class="expertise-tag">International Antitrust</span>
+                            <span class="expertise-tag">Competition Law</span>
+                            <span class="expertise-tag">M&A Antitrust</span>
+                        </div>
+                    </div>
+                    <div class="contact-info">
+                        <a href="https://www.nortonrosefulbright.com" target="_blank">nortonrosefulbright.com</a>
+                    </div>
+                </div>
+
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <div class="profile-avatar">EC</div>
+                        <div class="profile-info">
+                            <h4>Eric Cramer</h4>
+                            <span class="organization">Berger Montague</span>
+                        </div>
+                    </div>
+                    <div class="profile-highlight">
+                        💎 $9B+ in antitrust settlements secured nationally - proven track record
+                    </div>
+                    <div class="expertise-list">
+                        <h5>Expertise</h5>
+                        <div class="expertise-tags">
+                            <span class="expertise-tag">Class Action Settlements</span>
+                            <span class="expertise-tag">Plaintiffs' Antitrust</span>
+                            <span class="expertise-tag">Multi-District Litigation</span>
+                            <span class="expertise-tag">Consumer Protection</span>
+                        </div>
+                    </div>
+                    <div class="contact-info">
+                        <a href="https://www.bergermontague.com" target="_blank">bergermontague.com</a>
+                    </div>
+                </div>
+
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <div class="profile-avatar">AE</div>
+                        <div class="profile-info">
+                            <h4>Antitrust Expert Panel</h4>
+                            <span class="organization">National Consortium</span>
+                        </div>
+                    </div>
+                    <div class="profile-highlight">
+                        🌐 Collective expertise across all antitrust practice areas for complex team assembly
+                    </div>
+                    <div class="expertise-list">
+                        <h5>Expertise</h5>
+                        <div class="expertise-tags">
+                            <span class="expertise-tag">Expert Witness</span>
+                            <span class="expertise-tag">Economic Analysis</span>
+                            <span class="expertise-tag">Market Definition</span>
+                            <span class="expertise-tag">Damages Calculation</span>
+                        </div>
+                    </div>
+                    <div class="contact-info">
+                        Available for consultation
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI/ML/Robotics Experts Section -->
+        <section class="category-section" data-category="aiml">
+            <div class="category-header">
+                <span class="category-icon">🤖</span>
+                <h2 class="category-title">AI/ML/Robotics Experts</h2>
+                <span class="category-count">8 profiles</span>
+            </div>
+            <div class="profiles-grid">
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <div class="profile-avatar">OA</div>
+                        <div class="profile-info">
+                            <h4>OpenAI Research Lead</h4>
+                            <span class="organization">OpenAI</span>
+                        </div>
+                    </div>
+                    <div class="profile-highlight">
+                        🧠 Leading development of GPT foundation models and RLHF alignment techniques
+                    </div>
+                    <div class="expertise-list">
+                        <h5>Expertise</h5>
+                        <div class="expertise-tags">
+                            <span class="expertise-tag">Large Language Models</span>
+                            <span class="expertise-tag">RLHF</span>
+                            <span class="expertise-tag">AI Safety</span>
+                            <span class="expertise-tag">Transformer Architecture</span>
+                        </div>
+                    </div>
+                    <div class="contact-info">
+                        <a href="https://openai.com" target="_blank">openai.com</a>
+                    </div>
+                </div>
+
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <div class="profile-avatar">MA</div>
+                        <div class="profile-info">
+                            <h4>Meta AI Research Director</h4>
+                            <span class="organization">Meta AI (FAIR)</span>
+                        </div>
+                    </div>
+                    <div class="profile-highlight">
+                        🔬 Pioneering open-source LLaMA models and computer vision breakthroughs
+                    </div>
+                    <div class="expertise-list">
+                        <h5>Expertise</h5>
+                        <div class="expertise-tags">
+                            <span class="expertise-tag">Open Source AI</span>
+                            <span class="expertise-tag">Computer Vision</span>
+                            <span class="expertise-tag">Self-Supervised Learning</span>
+                            <span class="expertise-tag">Multimodal AI</span>
+                        </div>
+                    </div>
+                    <div class="contact-info">
+                        <a href="https://ai.meta.com" target="_blank">ai.meta.com</a>
+                    </div>
+                </div>
+
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <div class="profile-avatar">GD</div>
+                        <div class="profile-info">
+                            <h4>Google DeepMind Scientist</h4>
+                            <span class="organization">Google DeepMind</span>
+                        </div>
+                    </div>
+                    <div class="profile-highlight">
+                        🎯 Advancing Gemini models and reinforcement learning for complex reasoning
+                    </div>
+                    <div class="expertise-list">
+                        <h5>Expertise</h5>
+                        <div class="expertise-tags">
+                            <span class="expertise-tag">Reinforcement Learning</span>
+                            <span class="expertise-tag">Game AI</span>
+                            <span class="expertise-tag">Neural Architecture</span>
+                            <span class="expertise-tag">Scientific AI</span>
+                        </div>
+                    </div>
+                    <div class="contact-info">
+                        <a href="https://deepmind.google" target="_blank">deepmind.google</a>
+                    </div>
+                </div>
+
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <div class="profile-avatar">BD</div>
+                        <div class="profile-info">
+                            <h4>Boston Dynamics Engineer</h4>
+                            <span class="organization">Boston Dynamics</span>
+                        </div>
+                    </div>
+                    <div class="profile-highlight">
+                        🦿 Designing next-gen autonomous robots with advanced mobility and manipulation
+                    </div>
+                    <div class="expertise-list">
+                        <h5>Expertise</h5>
+                        <div class="expertise-tags">
+                            <span class="expertise-tag">Legged Robotics</span>
+                            <span class="expertise-tag">Motion Planning</span>
+                            <span class="expertise-tag">Control Systems</span>
+                            <span class="expertise-tag">Autonomous Navigation</span>
+                        </div>
+                    </div>
+                    <div class="contact-info">
+                        <a href="https://www.bostondynamics.com" target="_blank">bostondynamics.com</a>
+                    </div>
+                </div>
+
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <div class="profile-avatar">FA</div>
+                        <div class="profile-info">
+                            <h4>Figure AI Roboticist</h4>
+                            <span class="organization">Figure AI</span>
+                        </div>
+                    </div>
+                    <div class="profile-highlight">
+                        🤖 Building humanoid robots for commercial applications and labor automation
+                    </div>
+                    <div class="expertise-list">
+                        <h5>Expertise</h5>
+                        <div class="expertise-tags">
+                            <span class="expertise-tag">Humanoid Robotics</span>
+                            <span class="expertise-tag">Embodied AI</span>
+                            <span class="expertise-tag">Manipulation</span>
+                            <span class="expertise-tag">Industrial Automation</span>
+                        </div>
+                    </div>
+                    <div class="contact-info">
+                        <a href="https://www.figure.ai" target="_blank">figure.ai</a>
+                    </div>
+                </div>
+
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <div class="profile-avatar">EA</div>
+                        <div class="profile-info">
+                            <h4>Enterprise AI Architect</h4>
+                            <span class="organization">Enterprise Solutions</span>
+                        </div>
+                    </div>
+                    <div class="profile-highlight">
+                        🏢 Deploying AI at scale for Fortune 500 companies with proven ROI
+                    </div>
+                    <div class="expertise-list">
+                        <h5>Expertise</h5>
+                        <div class="expertise-tags">
+                            <span class="expertise-tag">MLOps</span>
+                            <span class="expertise-tag">AI Infrastructure</span>
+                            <span class="expertise-tag">Enterprise Integration</span>
+                            <span class="expertise-tag">AI Governance</span>
+                        </div>
+                    </div>
+                    <div class="contact-info">
+                        Available for consultation
+                    </div>
+                </div>
+
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <div class="profile-avatar">FM</div>
+                        <div class="profile-info">
+                            <h4>Foundation Model Researcher</h4>
+                            <span class="organization">Academic Institution</span>
+                        </div>
+                    </div>
+                    <div class="profile-highlight">
+                        📚 Published 50+ papers on foundation model architectures and training methods
+                    </div>
+                    <div class="expertise-list">
+                        <h5>Expertise</h5>
+                        <div class="expertise-tags">
+                            <span class="expertise-tag">Foundation Models</span>
+                            <span class="expertise-tag">Pre-training</span>
+                            <span class="expertise-tag">Transfer Learning</span>
+                            <span class="expertise-tag">Scaling Laws</span>
+                        </div>
+                    </div>
+                    <div class="contact-info">
+                        Academic consultation available
+                    </div>
+                </div>
+
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <div class="profile-avatar">AS</div>
+                        <div class="profile-info">
+                            <h4>Autonomous Systems Lead</h4>
+                            <span class="organization">Advanced Research Labs</span>
+                        </div>
+                    </div>
+                    <div class="profile-highlight">
+                        🚗 Developing autonomous vehicle and drone systems with safety certifications
+                    </div>
+                    <div class="expertise-list">
+                        <h5>Expertise</h5>
+                        <div class="expertise-tags">
+                            <span class="expertise-tag">Autonomous Vehicles</span>
+                            <span class="expertise-tag">Sensor Fusion</span>
+                            <span class="expertise-tag">Safety Systems</span>
+                            <span class="expertise-tag">Perception</span>
+                        </div>
+                    </div>
+                    <div class="contact-info">
+                        Available for consultation
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Neo4j Graph Database Specialists Section -->
+        <section class="category-section" data-category="neo4j">
+            <div class="category-header">
+                <span class="category-icon">🔗</span>
+                <h2 class="category-title">Neo4j Graph Database Specialists</h2>
+                <span class="category-count">7 profiles</span>
+            </div>
+            <div class="profiles-grid">
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <div class="profile-avatar">MH</div>
+                        <div class="profile-info">
+                            <h4>Michael Hunger</h4>
+                            <span class="organization">Neo4j</span>
+                        </div>
+                    </div>
+                    <div class="profile-highlight">
+                        🌟 Neo4j Developer Relations Lead - connecting developers with graph technology
+                    </div>
+                    <div class="expertise-list">
+                        <h5>Expertise</h5>
+                        <div class="expertise-tags">
+                            <span class="expertise-tag">Cypher Query Language</span>
+                            <span class="expertise-tag">Graph Data Modeling</span>
+                            <span class="expertise-tag">Developer Advocacy</span>
+                            <span class="expertise-tag">Neo4j Ecosystem</span>
+                        </div>
+                    </div>
+                    <div class="contact-info">
+                        <a href="https://neo4j.com" target="_blank">neo4j.com</a> | Perfect for conspiracy network mapping
+                    </div>
+                </div>
+
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <div class="profile-avatar">JW</div>
+                        <div class="profile-info">
+                            <h4>Jim Webber</h4>
+                            <span class="organization">Neo4j</span>
+                        </div>
+                    </div>
+                    <div class="profile-highlight">
+                        🎓 Chief Scientist at Neo4j - foundational work on graph database theory
+                    </div>
+                    <div class="expertise-list">
+                        <h5>Expertise</h5>
+                        <div class="expertise-tags">
+                            <span class="expertise-tag">Graph Theory</span>
+                            <span class="expertise-tag">Distributed Systems</span>
+                            <span class="expertise-tag">Graph Algorithms</span>
+                            <span class="expertise-tag">Architecture</span>
+                        </div>
+                    </div>
+                    <div class="contact-info">
+                        <a href="https://neo4j.com" target="_blank">neo4j.com</a> | Ideal for relationship analysis
+                    </div>
+                </div>
+
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <div class="profile-avatar">NS</div>
+                        <div class="profile-info">
+                            <h4>Nigel Small</h4>
+                            <span class="organization">Neo4j</span>
+                        </div>
+                    </div>
+                    <div class="profile-highlight">
+                        🔧 Creator of py2neo - the Python driver for Neo4j graph databases
+                    </div>
+                    <div class="expertise-list">
+                        <h5>Expertise</h5>
+                        <div class="expertise-tags">
+                            <span class="expertise-tag">Python Integration</span>
+                            <span class="expertise-tag">Driver Development</span>
+                            <span class="expertise-tag">API Design</span>
+                            <span class="expertise-tag">Data Pipeline</span>
+                        </div>
+                    </div>
+                    <div class="contact-info">
+                        <a href="https://py2neo.org" target="_blank">py2neo.org</a>
+                    </div>
+                </div>
+
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <div class="profile-avatar">SA</div>
+                        <div class="profile-info">
+                            <h4>Stefan Armbruster</h4>
+                            <span class="organization">Neo4j</span>
+                        </div>
+                    </div>
+                    <div class="profile-highlight">
+                        ⚡ Neo4j Field Engineer - implementing enterprise graph solutions at scale
+                    </div>
+                    <div class="expertise-list">
+                        <h5>Expertise</h5>
+                        <div class="expertise-tags">
+                            <span class="expertise-tag">Enterprise Deployment</span>
+                            <span class="expertise-tag">Performance Tuning</span>
+                            <span class="expertise-tag">Clustering</span>
+                            <span class="expertise-tag">Migration</span>
+                        </div>
+                    </div>
+                    <div class="contact-info">
+                        <a href="https://neo4j.com" target="_blank">neo4j.com</a>
+                    </div>
+                </div>
+
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <div class="profile-avatar">GA</div>
+                        <div class="profile-info">
+                            <h4>Graph Analytics Expert</h4>
+                            <span class="organization">Neo4j Community</span>
+                        </div>
+                    </div>
+                    <div class="profile-highlight">
+                        📊 Specializing in graph algorithms for fraud detection and network analysis
+                    </div>
+                    <div class="expertise-list">
+                        <h5>Expertise</h5>
+                        <div class="expertise-tags">
+                            <span class="expertise-tag">Fraud Detection</span>
+                            <span class="expertise-tag">Network Analysis</span>
+                            <span class="expertise-tag">Centrality Algorithms</span>
+                            <span class="expertise-tag">Community Detection</span>
+                        </div>
+                    </div>
+                    <div class="contact-info">
+                        Available for consulting
+                    </div>
+                </div>
+
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <div class="profile-avatar">KG</div>
+                        <div class="profile-info">
+                            <h4>Knowledge Graph Architect</h4>
+                            <span class="organization">Enterprise Solutions</span>
+                        </div>
+                    </div>
+                    <div class="profile-highlight">
+                        🧩 Building enterprise knowledge graphs for complex entity resolution
+                    </div>
+                    <div class="expertise-list">
+                        <h5>Expertise</h5>
+                        <div class="expertise-tags">
+                            <span class="expertise-tag">Knowledge Graphs</span>
+                            <span class="expertise-tag">Entity Resolution</span>
+                            <span class="expertise-tag">Ontology Design</span>
+                            <span class="expertise-tag">Data Integration</span>
+                        </div>
+                    </div>
+                    <div class="contact-info">
+                        Available for consulting
+                    </div>
+                </div>
+
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <div class="profile-avatar">FC</div>
+                        <div class="profile-info">
+                            <h4>Forensic Graph Consultant</h4>
+                            <span class="organization">Legal Technology</span>
+                        </div>
+                    </div>
+                    <div class="profile-highlight">
+                        🔍 Expert in using graph databases for legal discovery and conspiracy mapping
+                    </div>
+                    <div class="expertise-list">
+                        <h5>Expertise</h5>
+                        <div class="expertise-tags">
+                            <span class="expertise-tag">Legal Discovery</span>
+                            <span class="expertise-tag">Conspiracy Mapping</span>
+                            <span class="expertise-tag">Evidence Graphs</span>
+                            <span class="expertise-tag">Timeline Analysis</span>
+                        </div>
+                    </div>
+                    <div class="contact-info">
+                        Available for legal cases
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Elite Law Schools & Research Centers Section -->
+        <section class="category-section" data-category="schools">
+            <div class="category-header">
+                <span class="category-icon">🏛️</span>
+                <h2 class="category-title">Elite Law Schools & Research Centers</h2>
+                <span class="category-count">4 institutions</span>
+            </div>
+            <div class="profiles-grid">
+                <div class="school-card">
+                    <h4>Georgetown University Law Center</h4>
+                    <div class="school-stats">
+                        <div class="stat-item"><strong>17</strong> Legal Clinics</div>
+                        <div class="stat-item"><strong>4</strong> SCOTUS Wins</div>
+                        <div class="stat-item"><strong>#1</strong> IP Law</div>
+                    </div>
+                    <div class="expertise-list">
+                        <h5>Key Programs</h5>
+                        <div class="expertise-tags">
+                            <span class="expertise-tag">Antitrust Law Clinic</span>
+                            <span class="expertise-tag">Supreme Court Institute</span>
+                            <span class="expertise-tag">Center for Technology Innovation</span>
+                            <span class="expertise-tag">Institute for Technology Law & Policy</span>
+                        </div>
+                    </div>
+                    <div class="contact-info">
+                        <a href="https://www.law.georgetown.edu" target="_blank">law.georgetown.edu</a>
+                    </div>
+                </div>
+
+                <div class="school-card">
+                    <h4>UC Law San Francisco (Hastings)</h4>
+                    <div class="school-stats">
+                        <div class="stat-item"><strong>12</strong> Research Centers</div>
+                        <div class="stat-item"><strong>Top 20</strong> Trial Advocacy</div>
+                    </div>
+                    <div class="expertise-list">
+                        <h5>Key Programs</h5>
+                        <div class="expertise-tags">
+                            <span class="expertise-tag">Center for Innovation</span>
+                            <span class="expertise-tag">Civil Justice Clinic</span>
+                            <span class="expertise-tag">Litigation Programs</span>
+                        </div>
+                    </div>
+                    <div class="contact-info">
+                        <a href="https://www.uchastings.edu" target="_blank">uchastings.edu</a>
+                    </div>
+                </div>
+
+                <div class="school-card">
+                    <h4>Columbia Law School</h4>
+                    <div class="school-stats">
+                        <div class="stat-item"><strong>#4</strong> National Ranking</div>
+                        <div class="stat-item"><strong>15+</strong> Centers & Programs</div>
+                    </div>
+                    <div class="expertise-list">
+                        <h5>Key Programs</h5>
+                        <div class="expertise-tags">
+                            <span class="expertise-tag">Center for Law, Economics & Antitrust</span>
+                            <span class="expertise-tag">Ira M. Millstein Center</span>
+                            <span class="expertise-tag">Corporate Law</span>
+                        </div>
+                    </div>
+                    <div class="contact-info">
+                        <a href="https://www.law.columbia.edu" target="_blank">law.columbia.edu</a>
+                    </div>
+                </div>
+
+                <div class="school-card">
+                    <h4>Harvard Law School</h4>
+                    <div class="school-stats">
+                        <div class="stat-item"><strong>#3</strong> National Ranking</div>
+                        <div class="stat-item"><strong>200+</strong> Faculty</div>
+                    </div>
+                    <div class="expertise-list">
+                        <h5>Key Programs</h5>
+                        <div class="expertise-tags">
+                            <span class="expertise-tag">Berkman Klein Center</span>
+                            <span class="expertise-tag">Program on Corporate Governance</span>
+                            <span class="expertise-tag">Competition Law Program</span>
+                        </div>
+                    </div>
+                    <div class="contact-info">
+                        <a href="https://hls.harvard.edu" target="_blank">hls.harvard.edu</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Landmark Legal Cases Section -->
+        <section class="category-section" data-category="cases">
+            <div class="category-header">
+                <span class="category-icon">📚</span>
+                <h2 class="category-title">Landmark Legal Cases & Precedents</h2>
+                <span class="category-count">8 cases</span>
+            </div>
+            <div class="profiles-grid">
+                <div class="case-card">
+                    <span class="case-type">Criminal Antitrust</span>
+                    <h4>United States v. DaVita Inc. (2022)</h4>
+                    <p class="case-description">Criminal labor market allocation case involving healthcare executives accused of conspiring not to compete for workers.</p>
+                    <div class="case-significance">
+                        <strong>Significance:</strong> Established precedent for criminal prosecution of no-poach agreements in labor markets.
+                    </div>
+                </div>
+
+                <div class="case-card">
+                    <span class="case-type">Monopolization</span>
+                    <h4>United States v. Microsoft Corp. (2001)</h4>
+                    <p class="case-description">Landmark case finding Microsoft monopolized the PC operating system market through anticompetitive practices.</p>
+                    <div class="case-significance">
+                        <strong>Significance:</strong> Defined standards for monopolization in technology markets; shaped modern tech antitrust enforcement.
+                    </div>
+                </div>
+
+                <div class="case-card">
+                    <span class="case-type">Merger/Divestiture</span>
+                    <h4>United States v. AT&T (1982)</h4>
+                    <p class="case-description">Historic breakup of the Bell System telephone monopoly into regional Bell operating companies.</p>
+                    <div class="case-significance">
+                        <strong>Significance:</strong> Largest corporate breakup in history; established framework for telecommunications competition.
+                    </div>
+                </div>
+
+                <div class="case-card">
+                    <span class="case-type">Price Fixing</span>
+                    <h4>United States v. Singer Mfg. Co. (1963)</h4>
+                    <p class="case-description">International price-fixing conspiracy among sewing machine manufacturers.</p>
+                    <div class="case-significance">
+                        <strong>Significance:</strong> Established principles for prosecuting international cartels and patent-based antitrust violations.
+                    </div>
+                </div>
+
+                <div class="case-card">
+                    <span class="case-type">Patent Misuse</span>
+                    <h4>Hartford-Empire Co. v. United States (1945)</h4>
+                    <p class="case-description">Glass container manufacturing patent pool conspiracy case.</p>
+                    <div class="case-significance">
+                        <strong>Significance:</strong> Key precedent on patent misuse and antitrust intersection; mandatory licensing remedies.
+                    </div>
+                </div>
+
+                <div class="case-card">
+                    <span class="case-type">Monopolization</span>
+                    <h4>United States v. E.I. du Pont de Nemours (1956)</h4>
+                    <p class="case-description">Cellophane case addressing market definition in monopolization analysis.</p>
+                    <div class="case-significance">
+                        <strong>Significance:</strong> Established the "reasonable interchangeability" test for defining relevant markets.
+                    </div>
+                </div>
+
+                <div class="case-card">
+                    <span class="case-type">Monopolization</span>
+                    <h4>United States v. Aluminum Co. of America (1945)</h4>
+                    <p class="case-description">Alcoa monopoly case establishing key principles for Section 2 Sherman Act violations.</p>
+                    <div class="case-significance">
+                        <strong>Significance:</strong> Defined monopoly power thresholds; established that market share alone can indicate monopoly.
+                    </div>
+                </div>
+
+                <div class="case-card">
+                    <span class="case-type">Horizontal Agreements</span>
+                    <h4>Standard Oil Co. v. United States (1911)</h4>
+                    <p class="case-description">Original trust-busting case leading to breakup of Standard Oil monopoly.</p>
+                    <div class="case-significance">
+                        <strong>Significance:</strong> Established the "rule of reason" for antitrust analysis; foundation of modern antitrust law.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Strategic Recommendations Section -->
+        <section class="recommendations-section">
+            <h3>🎯 Strategic Recommendations for Building Your Litigation Team</h3>
+            <ul class="recommendation-list">
+                <li>
+                    <span><strong>Antitrust Core:</strong> Assemble a lead team with both plaintiffs' and defense experience. Barry Barnett and Eric Cramer bring complementary perspectives with proven track records.</span>
+                </li>
+                <li>
+                    <span><strong>Criminal Defense:</strong> If facing DOJ investigation, John Walsh's first-ever acquittal makes him essential for criminal antitrust defense strategy.</span>
+                </li>
+                <li>
+                    <span><strong>Technology Expertise:</strong> Integrate AI/ML experts early to understand and explain complex algorithmic behavior in tech antitrust cases.</span>
+                </li>
+                <li>
+                    <span><strong>Evidence Mapping:</strong> Deploy Neo4j specialists like Michael Hunger to build conspiracy network visualizations that make complex relationships clear to juries.</span>
+                </li>
+                <li>
+                    <span><strong>Academic Support:</strong> Partner with Georgetown's 17 clinics or Columbia's Millstein Center for research support and expert witness development.</span>
+                </li>
+                <li>
+                    <span><strong>Precedent Strategy:</strong> Study DaVita for labor markets, Microsoft for tech monopolies, and Alcoa for market share analysis to build your legal framework.</span>
+                </li>
+            </ul>
+        </section>
+
+        <footer>
+            <p>📊 Expert Profiles Dashboard | Built for Litigation Team Assembly | Updated as your bench expands</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const categorySections = document.querySelectorAll('.category-section');
+            const recommendationsSection = document.querySelector('.recommendations-section');
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Update active button
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+
+                    const filter = this.getAttribute('data-filter');
+
+                    if (filter === 'all') {
+                        // Show all sections
+                        categorySections.forEach(section => {
+                            section.classList.remove('hidden');
+                        });
+                        recommendationsSection.classList.remove('hidden');
+                    } else {
+                        // Show only matching section
+                        categorySections.forEach(section => {
+                            if (section.getAttribute('data-category') === filter) {
+                                section.classList.remove('hidden');
+                            } else {
+                                section.classList.add('hidden');
+                            }
+                        });
+                        // Hide recommendations when filtering
+                        recommendationsSection.classList.add('hidden');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
